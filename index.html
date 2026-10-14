@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#f3efe6">
+<meta name="description" content="Table & Tale — a premium food community, recipe discovery and review network.">
+<title>Table & Tale — Premium Food Community</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%23d85f42'/%3E%3Cpath d='M30 20v60M40 20v60M35 20v22M68 20c-10 8-13 18-13 29v7h13v24' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#f3efe6;--paper:#fbfaf5;--ink:#17211c;--muted:#70786f;--line:#d9d8ce;
+ --accent:#d85f42;--lime:#d7e75e;--blue:#8faee8;--yellow:#f2c15e;--dark:#17211c;
+ --shadow:0 25px 70px rgba(23,33,28,.12);--r:28px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,sans-serif;overflow-x:hidden}
+button,a{font:inherit}a{text-decoration:none;color:inherit}img{display:block;width:100%;height:100%;object-fit:cover}
+.shell{width:min(1240px,calc(100% - 48px));margin:auto}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(243,239,230,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(23,33,28,.08)}
+.nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.04em;font-size:18px}
+.brand-mark{width:44px;height:44px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:white;box-shadow:0 8px 22px rgba(216,95,66,.25)}
+.navlinks{display:flex;gap:4px;align-items:center}
+.navlinks a{font-size:13px;font-weight:800;padding:11px 12px;border-radius:99px;color:#68716a;transition:.25s}
+.navlinks a:hover,.navlinks a.active{color:var(--ink);background:#fffdf8;box-shadow:0 8px 24px rgba(23,33,28,.08)}
+.navright{display:flex;gap:8px;align-items:center}
+.circle{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:#fffdf8;display:grid;place-items:center;cursor:pointer;transition:.25s}
+.circle:hover{transform:translateY(-3px) rotate(5deg);box-shadow:0 12px 24px rgba(23,33,28,.12)}
+.menu{display:none}
+.btn{border:0;min-height:48px;padding:13px 20px;border-radius:13px;font-weight:800;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:9px;position:relative;overflow:hidden;transition:.3s}
+.btn:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.4) 50%,transparent 75%);transform:translateX(-120%);transition:.65s}
+.btn:hover:after{transform:translateX(120%)}.btn:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(23,33,28,.16)}
+.dark{background:var(--ink);color:white}.accent{background:var(--accent);color:white}.light{background:#fffdf8;color:var(--ink);border:1px solid var(--line)}
+.page{display:none}.page.active{display:block}
+.hero-new{min-height:calc(100vh - 82px);padding:62px 0 45px;display:grid;align-items:center}
+.hero-new .hero-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
+.kicker{font:500 11px/1 DM Mono,monospace;letter-spacing:.14em;text-transform:uppercase;color:#737c73}
+.hero-new h1{font:600 clamp(48px,6vw,78px)/.92 Playfair Display,serif;letter-spacing:-.065em;margin:18px 0 27px;max-width:720px}
+.hero-new h1 em{color:var(--accent);font-style:italic}
+.hero-new .lead{font-size:17px;line-height:1.75;color:var(--muted);max-width:590px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.hero-art{height:650px;position:relative}
+.photo-main{position:absolute;left:7%;right:4%;top:2%;bottom:7%;border-radius:45% 45% 25px 25px;overflow:hidden;transform:rotate(3deg);box-shadow:var(--shadow)}
+.photo-main:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.25))}
+.photo-main img{transition:transform .8s}.hero-art:hover .photo-main img{transform:scale(1.06)}
+.art-sticker{position:absolute;z-index:2;left:0;top:10%;width:120px;height:120px;border-radius:50%;background:var(--lime);display:grid;place-items:center;text-align:center;font-size:12px;font-weight:800;line-height:1.2;transform:rotate(-12deg);animation:sticker 5s ease-in-out infinite}
+.art-note{position:absolute;z-index:3;right:0;bottom:4%;width:220px;background:#fffdf8;border:1px solid var(--line);padding:18px;border-radius:20px;box-shadow:var(--shadow)}
+.art-note strong{display:block;font-size:27px}.art-note span{font-size:12px;color:var(--muted)}
+.floating-chip{position:absolute;z-index:3;right:11%;top:9%;padding:12px 15px;border-radius:99px;background:var(--dark);color:#fff;font-size:12px;font-weight:800;animation:float 4s ease-in-out infinite}
+.marquee{background:var(--dark);color:#fff;overflow:hidden;padding:18px 0}
+.marquee-track{display:flex;width:max-content;gap:35px;animation:marquee 27s linear infinite}
+.marquee span{font:500 13px DM Mono,monospace;letter-spacing:.1em;text-transform:uppercase}.marquee b{color:var(--lime)}
+.section{padding:105px 0}.section.alt{background:#e6eadf}.section.darksec{background:var(--dark);color:white}
+.head{max-width:760px;margin-bottom:48px}.head.center{text-align:center;margin-left:auto;margin-right:auto}
+.head .num{font:500 11px DM Mono,monospace;color:#8a9189;letter-spacing:.15em}
+.head h2{font:500 clamp(42px,5.4vw,75px)/.95 Playfair Display,serif;letter-spacing:-.05em;margin:13px 0 17px}
+.head p{font-size:16px;line-height:1.75;color:var(--muted);max-width:680px}.darksec .head p{color:#aeb8b1}
+.feature-row{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:stretch}
+.feature-img{height:550px;border-radius:34px;overflow:hidden;position:relative}.feature-img img{transition:transform .9s}.feature-img:hover img{transform:scale(1.06)}
+.feature-caption{position:absolute;left:24px;right:24px;bottom:24px;background:rgba(255,253,248,.92);backdrop-filter:blur(16px);border-radius:20px;padding:19px}
+.feature-caption h3{margin:0 0 5px;font-family:Playfair Display,serif;font-size:28px}.feature-caption p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.side-stack{display:grid;grid-template-rows:1fr 1fr;gap:22px}.mini{border:1px solid var(--line);background:#fffdf8;border-radius:28px;padding:25px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:.35s}.mini:hover{transform:translateY(-7px);box-shadow:var(--shadow)}.mini .mini-top{display:flex;justify-content:space-between;align-items:center}.mini .tag{font:500 10px DM Mono,monospace;color:#727b73}.mini h3{font:500 32px/1 Playfair Display,serif;margin:12px 0}.mini p{color:var(--muted);line-height:1.6;font-size:14px;margin:0}.mini .arrow{font-size:25px;align-self:flex-end;color:var(--accent)}
+.three-column{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.editor-card{background:#fffdf8;border:1px solid var(--line);border-radius:25px;padding:17px;transition:.35s}.editor-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}.editor-img{height:290px;border-radius:17px;overflow:hidden;margin-bottom:17px}.editor-img img{transition:.7s}.editor-card:hover .editor-img img{transform:scale(1.08)}.editor-card h3{font:500 29px/1 Playfair Display,serif;margin:0 0 8px}.editor-card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0}.meta{display:flex;justify-content:space-between;color:#879087;font:500 10px DM Mono,monospace;margin-bottom:11px;text-transform:uppercase}
+.liveboard{border:1px solid rgba(255,255,255,.14);border-radius:34px;padding:35px;position:relative;overflow:hidden;background:linear-gradient(145deg,#1b2b23,#23392d)}
+.liveboard:before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;right:-150px;top:-180px;border:1px solid rgba(215,231,94,.17);box-shadow:0 0 0 50px rgba(215,231,94,.025),0 0 0 100px rgba(215,231,94,.018);animation:orbit 14s linear infinite}
+.live-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}.live-pill{display:flex;gap:8px;align-items:center;font:500 11px DM Mono,monospace;text-transform:uppercase;color:#cbd5ce}.live-dot{width:9px;height:9px;border-radius:50%;background:#6de18b;box-shadow:0 0 0 7px rgba(109,225,139,.1);animation:pulse 1.7s infinite}
+.route{position:relative;margin:70px 5% 55px;height:4px;background:rgba(255,255,255,.12)}.route-progress{position:absolute;height:100%;width:72%;background:linear-gradient(90deg,var(--accent),var(--lime));box-shadow:0 0 25px rgba(215,231,94,.22)}.route-marker{position:absolute;left:72%;top:50%;width:24px;height:24px;border-radius:50%;background:var(--lime);transform:translate(-50%,-50%);box-shadow:0 0 0 11px rgba(215,231,94,.12);animation:travel 3s ease-in-out infinite alternate}
+.route-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;z-index:2}.route-label{padding:18px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.04);transition:.3s}.route-label:hover{background:rgba(255,255,255,.09);transform:translateY(-5px)}.route-label b{display:block}.route-label span{display:block;color:#9fac9f;font-size:12px;margin-top:5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px;position:relative;z-index:2}.stat{background:#fff8f1;color:var(--ink);border-radius:17px;padding:19px;text-align:center}.stat b{font-size:25px;display:block}.stat span{font-size:11px;color:#758077}
+.float3d{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px;align-items:center}.scene{height:520px;border-radius:35px;background:#d7e1d0;position:relative;overflow:hidden;perspective:1000px}.scene .table{position:absolute;width:430px;height:430px;border-radius:50%;left:50%;top:52%;transform:translate(-50%,-50%) rotateX(62deg);background:#efe6d5;box-shadow:0 45px 70px rgba(23,33,28,.2);animation:tablefloat 5s ease-in-out infinite}.dish{position:absolute;width:190px;height:190px;border-radius:50%;left:50%;top:45%;transform:translate(-50%,-50%) rotateX(62deg);background:#fff;box-shadow:0 25px 40px rgba(23,33,28,.18);animation:dishfloat 4s ease-in-out infinite}.dish:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#d85f42 0 16%,#f2c15e 17% 30%,#789465 31% 43%,#e9c7a0 44%);left:35px;top:35px;animation:foodspin 9s linear infinite}.glass{position:absolute;width:85px;height:130px;border:3px solid rgba(255,255,255,.8);border-top:0;border-radius:0 0 30px 30px;right:17%;top:22%;transform:rotate(8deg);background:rgba(255,255,255,.16);animation:glassmove 4.5s ease-in-out infinite}.crumb{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent);animation:crumb 5s linear infinite}.c1{left:12%;top:25%}.c2{right:10%;bottom:23%;background:var(--yellow)}.c3{left:20%;bottom:16%;background:#718e68}
+.big-copy h2{font:500 clamp(45px,5vw,75px)/.95 Playfair Display,serif;letter-spacing:-.05em;margin:0 0 18px}.big-copy p{color:var(--muted);line-height:1.8;max-width:580px}.bullet{display:grid;grid-template-columns:38px 1fr;gap:13px;margin-top:26px}.bullet b{width:38px;height:38px;border-radius:50%;background:var(--lime);display:grid;place-items:center}.bullet h4{margin:0 0 4px}.bullet p{margin:0;font-size:13px}
+.parallax-new{height:650px;border-radius:38px;overflow:hidden;position:relative;background:#25372c}.parallax-new .layer{position:absolute;inset:-8%;background-position:center;background-size:cover;will-change:transform}.layer.food{background-image:linear-gradient(rgba(23,33,28,.35),rgba(23,33,28,.62)),url("https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=2000")}.layer.table2{inset:auto 4% -10% 4%;height:55%;background-image:url("https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1600");border-radius:40px 40px 0 0;opacity:.82;transform:translateY(var(--p2,0))}.parallax-copy{position:absolute;z-index:3;inset:0;display:grid;place-items:center;text-align:center;color:white;padding:30px}.parallax-copy h2{font:500 clamp(48px,6vw,86px)/.92 Playfair Display,serif;letter-spacing:-.055em;margin:0 0 15px;max-width:850px}.parallax-copy p{max-width:620px;line-height:1.7;color:#e1e8e2}
+.page-hero-new{padding:110px 0 95px;position:relative;background:#17211c;color:white;overflow:hidden}.page-hero-new:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(215,231,94,.2);border-radius:50%;right:-180px;top:-270px;box-shadow:0 0 0 60px rgba(215,231,94,.03),0 0 0 120px rgba(215,231,94,.025)}.page-hero-new h1{font:500 clamp(50px,7vw,92px)/.92 Playfair Display,serif;letter-spacing:-.06em;margin:15px 0;max-width:900px}.page-hero-new p{max-width:650px;color:#b8c3bc;line-height:1.7}.page-hero-new .kicker{color:var(--lime)}
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.service-tile{min-height:380px;border-radius:30px;padding:30px;background:#fffdf8;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:.35s}.service-tile:hover{transform:translateY(-8px);box-shadow:var(--shadow)}.service-tile:nth-child(2){background:var(--dark);color:white}.service-tile:nth-child(2) p{color:#abb7af}.service-tile:nth-child(3){background:var(--lime)}.service-tile:nth-child(4){background:var(--blue)}.service-tile .number{font:500 12px DM Mono,monospace}.service-tile h3{font:500 45px/.98 Playfair Display,serif;max-width:400px;margin:0 0 13px}.service-tile p{max-width:430px;color:var(--muted);line-height:1.7;margin:0}.service-tile .service-arrow{font-size:34px;align-self:flex-end}
+.glass-stage{background:linear-gradient(135deg,#d9e4d4,#9bb4a1);border-radius:38px;min-height:520px;padding:45px;position:relative;overflow:hidden}.glass-stage:before,.glass-stage:after{content:"";position:absolute;border-radius:50%;filter:blur(2px)}.glass-stage:before{width:270px;height:270px;background:rgba(216,95,66,.6);left:-70px;top:-70px;animation:blob 7s infinite alternate}.glass-stage:after{width:330px;height:330px;background:rgba(215,231,94,.6);right:-90px;bottom:-130px;animation:blob 8s infinite alternate-reverse}.glass-ui{position:relative;z-index:2;width:min(820px,100%);margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:14px;transform:rotate(-2deg);transition:.4s}.glass-stage:hover .glass-ui{transform:rotate(0) translateY(-6px)}.glass-panel{padding:24px;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.25);backdrop-filter:blur(22px);border-radius:25px;box-shadow:0 30px 60px rgba(23,33,28,.15)}.glass-panel.tall{grid-row:span 2}.glass-panel h3{font:500 34px Playfair Display,serif;margin:0 0 10px}.glass-panel p{color:#47564d;line-height:1.65;font-size:13px}.tiny-bars{display:flex;align-items:end;gap:7px;height:130px}.tiny-bars i{display:block;flex:1;border-radius:9px 9px 2px 2px;background:var(--dark);opacity:.85;animation:bars 2s ease-in-out infinite alternate}.tiny-bars i:nth-child(2){height:55%}.tiny-bars i:nth-child(1){height:80%}.tiny-bars i:nth-child(3){height:40%}.tiny-bars i:nth-child(4){height:68%}.tiny-bars i:nth-child(5){height:92%}
+.timeline-new{position:relative;padding:10px 0}.timeline-new:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:#c9d0c8}.time-row{display:grid;grid-template-columns:1fr 80px 1fr;gap:20px;align-items:center;margin:30px 0}.time-dot{width:22px;height:22px;border-radius:50%;background:var(--accent);margin:auto;box-shadow:0 0 0 10px rgba(216,95,66,.12)}.time-card{background:#fffdf8;border:1px solid var(--line);border-radius:22px;padding:23px;transition:.3s}.time-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.time-card h3{font:500 28px Playfair Display,serif;margin:0 0 6px}.time-card p{color:var(--muted);line-height:1.6;font-size:13px;margin:0}.time-row:nth-child(even) .time-card:first-child{grid-column:3}.time-row:nth-child(even) .time-card:last-child{grid-column:1;grid-row:1}
+.review-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}.review-feature{background:var(--dark);color:white;border-radius:32px;padding:35px;min-height:460px;display:flex;flex-direction:column;justify-content:space-between}.quote{font:500 clamp(38px,4.5vw,63px)/1.02 Playfair Display,serif;letter-spacing:-.04em}.review-feature small{color:#aeb9b1;font:500 11px DM Mono,monospace}.review-list{display:grid;gap:14px}.review-item{background:#fffdf8;border:1px solid var(--line);border-radius:22px;padding:24px;transition:.3s}.review-item:hover{transform:translateX(7px);box-shadow:var(--shadow)}.stars{color:#b78223;letter-spacing:3px}.review-item p{color:#606c64;line-height:1.65}.review-item b{font-size:13px}
+.community-map{display:grid;grid-template-columns:.75fr 1.25fr;gap:22px}.topic-list{display:grid;gap:10px}.topic{padding:20px;border:1px solid var(--line);background:#fffdf8;border-radius:20px;display:flex;justify-content:space-between;align-items:center;transition:.3s}.topic:hover{transform:translateX(8px);box-shadow:var(--shadow)}.topic span{color:var(--muted);font-size:12px}.community-wall{border-radius:34px;background:#dfe6d8;min-height:500px;position:relative;overflow:hidden}.post{position:absolute;width:190px;background:#fffdf8;border-radius:18px;padding:16px;box-shadow:0 20px 35px rgba(23,33,28,.13);font-size:12px;line-height:1.5;animation:postfloat 5s ease-in-out infinite}.post b{display:block;margin-bottom:7px}.p1{left:7%;top:12%;transform:rotate(-5deg)}.p2{right:8%;top:23%;transform:rotate(4deg);animation-delay:.8s}.p3{left:26%;bottom:13%;transform:rotate(3deg);animation-delay:1.5s}.p4{right:25%;bottom:7%;transform:rotate(-4deg);animation-delay:2.2s}.wall-ring{position:absolute;width:330px;height:330px;border:1px dashed #9cae9b;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);animation:orbit 15s linear infinite}.wall-ring:after{content:"";position:absolute;width:17px;height:17px;border-radius:50%;background:var(--accent);top:8px;left:50%}
+.dashboard-new{display:grid;grid-template-columns:230px 1fr;background:#fffdf8;border:1px solid var(--line);border-radius:32px;overflow:hidden;min-height:570px}.dash-side{background:var(--dark);color:white;padding:25px}.dash-side a{display:block;color:#b9c4bd;padding:12px 14px;border-radius:12px;margin:4px 0}.dash-side a:hover{background:rgba(255,255,255,.08);color:white}.dash-body{padding:30px}.dash-head{display:flex;justify-content:space-between;gap:15px;align-items:center}.dash-head h2{font:500 36px Playfair Display,serif;margin:0}.dash-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0}.dash-metric{background:#edf0e8;border-radius:20px;padding:19px}.dash-metric span{font-size:11px;color:#758077}.dash-metric b{display:block;font-size:30px;margin-top:7px}.activity{border:1px solid var(--line);border-radius:22px;overflow:hidden}.activity-row{display:grid;grid-template-columns:1.2fr .8fr .8fr;padding:16px 18px;border-bottom:1px solid var(--line);font-size:13px}.activity-row:last-child{border-bottom:0}.status{display:inline-flex;justify-self:start;padding:5px 9px;border-radius:99px;background:#dcebd9;color:#45664d;font-size:10px;font-weight:800}
+.login-layout{display:grid;grid-template-columns:1fr 1fr;min-height:600px}.login-art{background:var(--accent);color:white;padding:55px;position:relative;overflow:hidden}.login-art:before{content:"";position:absolute;width:450px;height:450px;border-radius:50%;border:1px solid rgba(255,255,255,.3);right:-170px;bottom:-190px}.login-art h2{font:500 clamp(48px,5vw,78px)/.95 Playfair Display,serif;max-width:550px;margin:60px 0 20px}.login-art p{max-width:480px;line-height:1.7;color:#ffe7df}.login-form{padding:55px;background:#fffdf8;display:grid;align-content:center}.form-inner{width:min(440px,100%);margin:auto}.form-inner h2{font:500 45px Playfair Display,serif;margin:0 0 9px}.form-inner>p{color:var(--muted);font-size:13px;margin-bottom:25px}.field{margin:0 0 14px}.field label{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:white;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(216,95,66,.1)}
+.contact-new{display:grid;grid-template-columns:.75fr 1.25fr;gap:20px}.contact-info-new{background:var(--dark);color:white;border-radius:32px;padding:34px}.contact-info-new h2{font:500 45px Playfair Display,serif;margin:0 0 30px}.contact-line{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12)}.contact-line small{display:block;color:#8e9a92;font:500 10px DM Mono,monospace;text-transform:uppercase;margin-bottom:6px}.contact-line b{font-size:14px}.form-card{background:#fffdf8;border:1px solid var(--line);border-radius:32px;padding:34px}.form-card h2{font:500 42px Playfair Display,serif;margin:0 0 25px}.social-row{display:flex;gap:8px;margin-top:22px}.social-row a{width:42px;height:42px;border:1px solid rgba(255,255,255,.17);border-radius:50%;display:grid;place-items:center;color:white;transition:.3s}.social-row a:hover{background:var(--lime);color:var(--ink);transform:translateY(-4px)}.map-new{width:100%;height:280px;border:0;border-radius:22px;margin-top:20px}
+.footer-new{background:#0e1612;color:white;padding:65px 0 25px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:35px}.footer-new p,.footer-new a{color:#8f9b93;line-height:1.7}.footer-new a{display:block;margin:7px 0}.footer-new a:hover{color:white}.foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:45px;padding-top:18px;color:#6f7a73;font:500 10px DM Mono,monospace}
+.reveal{opacity:0;transform:translateY(28px);transition:.75s cubic-bezier(.2,.8,.2,1)}.reveal.in{opacity:1;transform:none}
+@keyframes marquee{to{transform:translateX(-50%)}}@keyframes sticker{50%{transform:rotate(7deg) translateY(-10px)}}@keyframes float{50%{transform:translateY(-12px)}}@keyframes pulse{50%{box-shadow:0 0 0 13px rgba(109,225,139,0)}}@keyframes travel{to{left:80%}}@keyframes orbit{to{transform:rotate(360deg)}}@keyframes tablefloat{50%{transform:translate(-50%,-56%) rotateX(62deg) rotateZ(3deg)}}@keyframes dishfloat{50%{transform:translate(-50%,-58%) rotateX(62deg) rotateZ(-4deg)}}@keyframes foodspin{to{transform:rotate(360deg)}}@keyframes glassmove{50%{transform:rotate(-3deg) translateY(-12px)}}@keyframes crumb{0%{transform:translate(0,0)}50%{transform:translate(90px,-40px)}100%{transform:translate(160px,30px)}}@keyframes blob{to{transform:translate(55px,30px) scale(1.12)}}@keyframes bars{to{transform:scaleY(.6);transform-origin:bottom}}@keyframes postfloat{50%{transform:translateY(-10px) rotate(1deg)}}
+@media(max-width:1080px){.navlinks a{padding:10px 7px;font-size:12px}.navright>.dark{display:none}.hero-new .hero-layout{gap:30px}.hero-art{height:560px}.feature-img{height:480px}}
+@media(max-width:820px){
+ .shell{width:min(100% - 30px,650px)}.nav{height:70px}.navlinks{display:none;position:absolute;top:70px;left:15px;right:15px;background:#fffdf8;border:1px solid var(--line);border-radius:20px;padding:8px;box-shadow:var(--shadow);flex-direction:column;align-items:stretch}.navlinks.open{display:flex}.navlinks a{text-align:center}.menu{display:grid}.navright .circle:first-child{display:none}
+ .hero-new{padding:50px 0}.hero-new .hero-layout,.float3d,.login-layout,.contact-new,.community-map,.review-grid{grid-template-columns:1fr}.hero-new h1{font-size:clamp(55px,15vw,82px)}.hero-art{height:450px}.photo-main{left:5%;right:2%}.art-note{right:0}.section{padding:70px 0}.feature-row,.service-grid{grid-template-columns:1fr}.feature-img{height:430px}.side-stack{grid-template-rows:auto auto}.three-column{grid-template-columns:1fr}.liveboard{padding:24px}.route-labels{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr}.scene{height:430px}.parallax-new{height:520px}.glass-stage{padding:25px}.glass-ui{grid-template-columns:1fr}.glass-panel.tall{grid-row:auto}.timeline-new:before{left:14px}.time-row{grid-template-columns:30px 1fr;gap:13px}.time-dot{grid-column:1!important;grid-row:1}.time-card,.time-row:nth-child(even) .time-card:first-child,.time-row:nth-child(even) .time-card:last-child{grid-column:2!important;grid-row:1!important}.dashboard-new{grid-template-columns:1fr}.dash-side{display:none}.dash-metrics{grid-template-columns:1fr}.login-art{min-height:400px}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:470px){
+ .shell{width:calc(100% - 22px)}.hero-actions .btn{width:100%}.hero-art{height:370px}.art-sticker{width:90px;height:90px;font-size:10px}.art-note{width:180px}.floating-chip{right:4%;font-size:10px}.section{padding:55px 0}.head h2{font-size:42px}.feature-img{height:360px}.route-labels{grid-template-columns:1fr}.service-tile{min-height:330px}.service-tile h3{font-size:38px}.parallax-new{height:440px}.parallax-copy h2{font-size:48px}.login-art{padding:30px}.login-art h2{margin-top:35px;font-size:50px}.login-form{padding:30px}.contact-info-new,.form-card{padding:25px}.footer-grid{grid-template-columns:1fr}.dash-head{align-items:flex-start;flex-direction:column}}
+
+/* ===== FINAL REFINEMENT ===== */
+body{background:#f3efe6}
+.page .section{padding:72px 0}
+.head.center{text-align:center}
+.head.center p{margin-left:auto;margin-right:auto}
+.head:not(.center){text-align:center;margin-left:auto;margin-right:auto}
+.head:not(.center) p{margin-left:auto;margin-right:auto}
+.feature-caption{text-align:center}
+.mini{text-align:center}.mini .mini-top{justify-content:center;gap:18px}.mini .arrow{align-self:center}
+.editor-card{text-align:center}.meta{justify-content:center;gap:18px}.editor-card h3,.editor-card p{text-align:center}
+.hero-new .hero-layout>div:first-child{text-align:center}.hero-new .lead{margin-left:auto;margin-right:auto}.hero-actions{justify-content:center}
+.big-copy{text-align:center}.big-copy p{margin-left:auto;margin-right:auto}.bullet{text-align:center}.bullet{grid-template-columns:1fr}.bullet b{margin:auto}
+.service-tile{text-align:center}.service-tile .service-arrow{align-self:center}
+.page-hero-new{text-align:center}.page-hero-new p{margin-left:auto;margin-right:auto}
+.contact-info-new{text-align:center}.contact-line{text-align:center}.social-row{justify-content:center}
+.form-card{text-align:center}.form-card .field{text-align:left}
+.kitchen-flow{border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:28px;background:linear-gradient(145deg,#1b2b23,#263d31);position:relative;overflow:hidden;box-shadow:0 25px 70px rgba(0,0,0,.16)}
+.kitchen-flow:after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;right:-150px;top:-160px;border:1px solid rgba(215,231,94,.16);box-shadow:0 0 0 45px rgba(215,231,94,.025),0 0 0 90px rgba(215,231,94,.018);animation:orbit 13s linear infinite}
+.flow-head{display:flex;justify-content:space-between;gap:15px;color:#829188;font:500 10px DM Mono,monospace;letter-spacing:.08em;position:relative;z-index:2}.flow-live{color:#d9e2dc;display:flex;align-items:center;gap:8px}.flow-live i{width:9px;height:9px;border-radius:50%;background:#6de18b;box-shadow:0 0 0 7px rgba(109,225,139,.1);animation:pulse 1.7s infinite}
+.flow-stage{height:250px;position:relative;margin:25px 3% 12px;z-index:2}
+.flow-track{position:absolute;left:5%;right:5%;top:50%;height:7px;background:rgba(255,255,255,.12);border-radius:99px}.flow-fill{height:100%;width:64%;background:linear-gradient(90deg,var(--accent),var(--yellow),var(--lime));border-radius:99px;animation:flowfill 5s ease-in-out infinite alternate}.flow-runner{position:absolute;left:64%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:#fff8ef;display:grid;place-items:center;font-size:24px;box-shadow:0 0 0 11px rgba(215,231,94,.13),0 12px 25px rgba(0,0,0,.2);animation:runner 5s ease-in-out infinite alternate}
+.flow-stop{position:absolute;top:calc(50% + 28px);transform:translateX(-50%);text-align:center;color:#dce4de;min-width:70px}.flow-stop:before{content:"";position:absolute;left:50%;top:-40px;width:14px;height:14px;border-radius:50%;background:#7c8b82;border:3px solid #263d31;transform:translateX(-50%)}.flow-stop b{display:block;font-size:12px}.flow-stop span{font-size:10px;color:#8d9a91}.s1{left:5%}.s2{left:27.5%}.s3{left:50%}.s4{left:72.5%}.s5{left:95%}.s3:before{background:var(--lime);box-shadow:0 0 0 7px rgba(215,231,94,.1)}
+.flow-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:2}.flow-cards div{background:#fff8f1;color:var(--ink);border-radius:17px;padding:18px;text-align:center}.flow-cards strong{font-size:24px;display:block}.flow-cards span{font-size:10px;color:#758077}
+.journey-track{position:relative;max-width:980px;margin:30px auto 0;padding:5px 0}.journey-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(#d7e75e,#d85f42);transform:translateX(-50%);opacity:.65}.journey-item{position:relative;display:grid;grid-template-columns:1fr 90px 1fr;align-items:center;min-height:150px}.journey-card{width:min(100%,560px);background:#fffdf8;border:1px solid #d8d7cc;border-radius:25px;padding:23px 28px;box-shadow:0 10px 30px rgba(23,33,28,.05);transition:.35s;text-align:center}.journey-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#c8c8ba}.journey-card span{font:500 10px DM Mono,monospace;color:#7c857d;letter-spacing:.12em}.journey-card h3{font:500 31px/1 Playfair Display,serif;margin:8px 0}.journey-card p{color:#70786f;line-height:1.55;font-size:13px;margin:0}.journey-node{width:50px;height:50px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 11px DM Mono,monospace;box-shadow:0 0 0 10px rgba(216,95,66,.1);z-index:2;animation:nodepulse 2.5s infinite}.journey-item.left .journey-card{grid-column:1;justify-self:end}.journey-item.left .journey-node{grid-column:2}.journey-item.right .journey-card{grid-column:3;justify-self:start}.journey-item.right .journey-node{grid-column:2;grid-row:1}.journey-item:nth-child(2) .journey-node,.journey-item:nth-child(4) .journey-node{background:var(--dark)}
+.dashboard-page{min-height:100vh;background:#edf0e8}.dashboard-top{height:76px;background:#fffdf8;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:20}.dashboard-brand{display:flex;align-items:center;gap:10px}.dashboard-brand .brand-mark{width:38px;height:38px}.dashboard-actions{display:flex;align-items:center;gap:8px}.dashboard-user{font-size:12px;color:#69746c;margin-right:7px}.dashboard-content{width:min(1160px,calc(100% - 44px));margin:auto;padding:48px 0 70px}.dashboard-welcome{display:flex;justify-content:space-between;align-items:end;gap:20px;text-align:center}.dashboard-welcome>div{margin:auto}.dashboard-welcome .kicker{margin-bottom:8px}.dashboard-welcome h1{font:500 clamp(38px,5vw,62px)/1 Playfair Display,serif;letter-spacing:-.04em;margin:0 0 10px}.dashboard-welcome p{color:var(--muted);max-width:650px;line-height:1.65;margin:0 auto}.dashboard-metrics-new{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0}.dashboard-metrics-new>div{background:#fffdf8;border:1px solid var(--line);border-radius:20px;padding:20px;text-align:center}.dashboard-metrics-new span{font:500 10px DM Mono,monospace;color:#7b857c}.dashboard-metrics-new strong{display:block;font-size:34px;margin:8px 0 2px}.dashboard-metrics-new small{color:#6f7a72}.dashboard-grid-new{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.dash-panel{background:#fffdf8;border:1px solid var(--line);border-radius:25px;padding:23px}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.panel-title h2{font:500 27px Playfair Display,serif;margin:0}.panel-title span{font:500 9px DM Mono,monospace;color:#7c867e}.next-meal{display:grid;grid-template-columns:190px 1fr;gap:20px;align-items:center;text-align:center}.next-img{height:210px;border-radius:17px;overflow:hidden}.next-meal p{color:var(--muted);line-height:1.55;font-size:12px}.next-meal h3{font:500 28px/1.05 Playfair Display,serif;margin:10px 0}.dash-activity{display:grid;gap:0}.dash-activity div{display:flex;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);font-size:12px}.dash-activity div:last-child{border-bottom:0}.dash-activity span{color:#7a847d}.quick-panel{margin-top:14px;text-align:center}.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.quick-actions button{border:1px solid var(--line);background:#f1f3ec;border-radius:15px;padding:16px;cursor:pointer;font-weight:700;transition:.3s}.quick-actions button:hover{background:var(--lime);transform:translateY(-3px)}.quick-actions b{float:right}
+.auth-page{min-height:100vh;background:#f3efe6}.auth-screen{min-height:100vh;display:grid;place-items:center;align-content:center;padding:45px 20px;position:relative}.auth-logo{position:absolute;top:32px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800}.auth-box{width:min(460px,100%);background:#fffdf8;border:1px solid var(--line);border-radius:30px;padding:38px;box-shadow:var(--shadow);text-align:center}.auth-box h1{font:500 48px/1 Playfair Display,serif;margin:12px 0}.auth-box>p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 auto 25px;max-width:370px}.auth-box .field{text-align:left}.auth-or{color:#8a928b;margin:16px 0;font-size:11px}.auth-switch{margin-top:18px;font-size:12px;color:#7a847d}.auth-switch a{font-weight:800;color:var(--accent)}
+body.utility-page .topbar,body.utility-page>footer{display:none!important}
+@keyframes flowfill{to{width:82%}}@keyframes runner{to{left:82%}}@keyframes nodepulse{50%{box-shadow:0 0 0 16px rgba(216,95,66,0)}} 
+@media(max-width:820px){
+ .page .section{padding:58px 0}.flow-head{flex-direction:column;align-items:center;text-align:center}.flow-stage{height:370px}.flow-track{top:52%;left:7%;right:7%}.flow-stop{top:calc(52% + 28px)}.s1{left:7%}.s2{left:28.5%}.s3{left:50%}.s4{left:71.5%}.s5{left:93%}.flow-cards{grid-template-columns:1fr}.journey-track{padding:0 0 0 48px}.journey-line{left:23px}.journey-item{display:grid;grid-template-columns:46px 1fr;min-height:145px;gap:12px}.journey-item.left .journey-card,.journey-item.right .journey-card{grid-column:2;grid-row:1;justify-self:stretch}.journey-item.left .journey-node,.journey-item.right .journey-node{grid-column:1;grid-row:1}.dashboard-top{padding:0 14px}.dashboard-user{display:none}.dashboard-content{width:calc(100% - 24px);padding-top:30px}.dashboard-welcome{flex-direction:column;align-items:center}.dashboard-metrics-new{grid-template-columns:1fr 1fr}.dashboard-grid-new{grid-template-columns:1fr}.next-meal{grid-template-columns:1fr}.next-img{height:240px}.quick-actions{grid-template-columns:1fr 1fr}.signup-nav{display:none}}
+@media(max-width:470px){
+ .dashboard-top .light{display:none}.dashboard-top{justify-content:center}.dashboard-actions{position:absolute;right:10px}.dashboard-brand{margin-right:auto}.dashboard-metrics-new{grid-template-columns:1fr}.quick-actions{grid-template-columns:1fr}.auth-box{padding:28px 20px}.auth-box h1{font-size:42px}.journey-card{padding:20px 16px}.journey-card h3{font-size:27px}.flow-stage{height:420px}.flow-stop{transform:translateX(-50%) rotate(-90deg);transform-origin:center}.flow-stop span{display:none}}
+
+
+.service-tile{isolation:isolate;min-height:350px}
+.service-tile::before{content:"";position:absolute;inset:0;z-index:-2;background-position:center;background-size:cover;transform:scale(1.02);transition:transform .7s ease,filter .7s ease}
+.service-tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(17,29,23,.12),rgba(17,29,23,.78))}
+.service-tile:hover::before{transform:scale(1.08)}
+.service-tile:nth-child(1)::before{background-image:url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200")}
+.service-tile:nth-child(2)::before{background-image:url("https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1200")}
+.service-tile:nth-child(3)::before{background-image:url("https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1200")}
+.service-tile:nth-child(4)::before{background-image:url("https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1200")}
+.service-tile:nth-child(n){color:#fff}
+.service-tile:nth-child(n) p{color:rgba(255,255,255,.82)}
+.service-tile:nth-child(n) .number{color:rgba(255,255,255,.78)}
+.service-tile:nth-child(n) .service-arrow{color:#fff}
+
+
+.logo-3d{width:30px;height:30px;display:block;filter:drop-shadow(0 6px 5px rgba(23,33,28,.2));transform:translateZ(0);transition:transform .35s ease}
+.brand-mark:hover .logo-3d{transform:rotate(-7deg) translateY(-2px) scale(1.06)}
+.brand-mark{display:grid;place-items:center;perspective:300px}
+.page-hero-new{text-align:center;padding:82px 0 70px}
+.page-hero-new h1{margin-left:auto;margin-right:auto;max-width:850px;font-size:clamp(45px,6vw,76px)}
+.page-hero-new p{margin-left:auto;margin-right:auto}
+.section{padding:76px 0}
+.head h2{font-size:clamp(36px,4.8vw,62px)}
+.service-tile h3{font-size:clamp(34px,3.8vw,48px)}
+.service-tile p{font-size:14px}
+.auth-page{min-height:100vh}
+.auth-screen{padding:30px 18px}
+.auth-box.auth-premium{position:relative;width:min(480px,100%);padding:24px 34px 34px}
+.auth-logo{position:static;transform:none;justify-content:center;margin:0 auto 18px;gap:10px}
+.auth-logo .brand-mark{width:56px;height:56px;border-radius:18px}
+.auth-logo .logo-3d{width:40px;height:40px}
+.auth-visual-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;height:82px;border-radius:18px;overflow:hidden;margin:0 0 22px}
+.auth-visual-strip img{transition:transform .5s}
+.auth-visual-strip img:hover{transform:scale(1.07)}
+.auth-box h1{font-size:44px}
+.auth-box .kicker{margin-top:3px}
+.auth-box>p{margin-bottom:21px}
+.utility-page .topbar,.utility-page .footer-new{display:none!important}
+.dashboard-page{min-height:100vh}
+.dashboard-top{position:static}
+.contact-new{align-items:stretch}
+.contact-info-new,.form-card{min-height:520px}
+.contact-info-new h2,.form-card h2{font-size:38px}
+@media(max-width:820px){
+ .section{padding:58px 0}
+ .page-hero-new{padding:70px 0 58px}
+ .auth-box.auth-premium{padding:20px 22px 28px}
+ .auth-visual-strip{height:70px}
+}
+@media(max-width:470px){
+ .auth-box h1{font-size:38px}
+ .auth-logo .brand-mark{width:50px;height:50px}
+ .auth-logo .logo-3d{width:36px;height:36px}
+ .auth-visual-strip{height:62px}
+ .contact-info-new,.form-card{min-height:auto}
+}
+
+
+/* Meaningful Recipe-to-Plate motion graphic */
+.recipe-scene{background:linear-gradient(145deg,#dce6d4,#c8d7c1)!important;overflow:hidden;isolation:isolate;transition:transform .18s ease-out;cursor:crosshair}
+.scene-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(23,33,28,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(23,33,28,.045) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(circle at 50% 50%,black,transparent 76%)}
+.recipe-scene:before{content:"";position:absolute;width:72%;height:46%;left:14%;top:34%;border-radius:50%;background:#efe4cf;box-shadow:0 28px 38px rgba(23,33,28,.12);transform:rotateX(63deg);z-index:1}
+.recipe-scene:after{content:"";position:absolute;width:47%;height:18%;left:26.5%;top:49%;border-radius:50%;background:rgba(23,33,28,.14);filter:blur(18px);z-index:2}
+.recipe-plate{position:absolute;z-index:5;width:43%;aspect-ratio:1;left:28.5%;top:39%;transform:rotateX(62deg);transform-style:preserve-3d;animation:plate-breathe 5s ease-in-out infinite}
+.plate-shadow{position:absolute;inset:9%;border-radius:50%;background:rgba(23,33,28,.2);filter:blur(13px);transform:translateZ(-28px)}
+.plate-rim{position:absolute;inset:0;border-radius:50%;background:linear-gradient(145deg,#fffdf9,#e7e0d4);box-shadow:0 18px 24px rgba(23,33,28,.18);display:grid;place-items:center}
+.plate-inner{width:69%;height:69%;border-radius:50%;background:#f0d0a6;display:grid;place-items:center;box-shadow:inset 0 0 0 8px #fffdf9}
+.dish-food{width:67%;height:67%;border-radius:50%;background:radial-gradient(circle,#d85f42 0 20%,#e8b64f 21% 39%,#718d62 40% 56%,#f5e8d3 57%);position:relative;animation:food-turn 10s linear infinite}
+.food-piece{position:absolute;width:16%;height:9%;border-radius:100%;background:#d85f42;box-shadow:0 2px 3px rgba(0,0,0,.15)}
+.f1{left:16%;top:25%;transform:rotate(24deg)}.f2{right:17%;top:31%;transform:rotate(-28deg);background:#e9b654}.f3{left:24%;bottom:21%;transform:rotate(-17deg);background:#d85f42}.f4{right:24%;bottom:18%;transform:rotate(20deg);background:#e8b654}
+.herb{position:absolute;width:12%;height:5%;border-radius:100%;background:#5d815a}.h1{left:40%;top:14%;transform:rotate(35deg)}.h2{left:20%;top:52%;transform:rotate(-35deg)}.h3{right:19%;top:52%;transform:rotate(32deg)}
+.ingredient{position:absolute;z-index:8;width:24px;height:24px;border-radius:50%;box-shadow:0 7px 12px rgba(23,33,28,.18);transition:transform .2s}
+.ingredient:after{content:attr(data-name);position:absolute;left:50%;top:30px;transform:translateX(-50%);white-space:nowrap;background:#fffdf8;border:1px solid #d7dbd1;border-radius:99px;padding:5px 8px;font:700 9px Manrope,sans-serif;color:#59635c;opacity:0;transition:.25s}
+.ingredient:hover:after{opacity:1}
+.ing-tomato{background:#d85f42;left:20%;top:28%;animation:ingredient-tomato 7s ease-in-out infinite}
+.ing-leaf{background:#6f9164;right:19%;top:23%;border-radius:45% 55% 45% 55%;animation:ingredient-leaf 8s ease-in-out infinite}
+.ing-lemon{background:#e8bb51;right:15%;bottom:24%;animation:ingredient-lemon 7.5s ease-in-out infinite}
+.ing-pasta{background:#d7a24d;left:14%;bottom:22%;width:30px;height:13px;border-radius:100%;animation:ingredient-pasta 8.5s ease-in-out infinite}
+.orbit{position:absolute;z-index:3;border:1px dashed rgba(23,33,28,.18);border-radius:50%;pointer-events:none}
+.orbit-a{width:58%;height:32%;left:21%;top:42%;transform:rotateX(63deg);animation:orbit-drift 12s linear infinite}
+.orbit-b{width:70%;height:38%;left:15%;top:37%;transform:rotateX(63deg) rotateZ(22deg);animation:orbit-drift 17s linear infinite reverse}
+.orbit i{position:absolute;width:10px;height:10px;border-radius:50%;background:#d85f42;left:50%;top:-5px;box-shadow:0 0 0 7px rgba(216,95,66,.1)}
+.orbit-b i{background:#6f9164;top:auto;bottom:-5px}
+.steam{position:absolute;z-index:7;width:18px;height:85px;border-left:2px solid rgba(255,255,255,.75);border-radius:50%;filter:blur(.2px);opacity:.65}
+.s1{left:45%;top:18%;transform:rotate(7deg);animation:steam 3.3s ease-in-out infinite}.s2{left:52%;top:15%;height:75px;animation:steam 3.7s ease-in-out .6s infinite}.s3{left:58%;top:20%;height:65px;transform:rotate(-8deg);animation:steam 3.5s ease-in-out 1s infinite}
+.glass-real{z-index:6;position:absolute;right:15%;top:25%;width:72px;height:112px;border:3px solid rgba(255,255,255,.8);border-top:0;border-radius:0 0 25px 25px;background:linear-gradient(180deg,transparent 20%,rgba(255,255,255,.17));transform:rotate(4deg);animation:glass-sway 4.5s ease-in-out infinite}
+.glass-real:before{content:"";position:absolute;left:8px;right:8px;bottom:-18px;height:18px;border-top:3px solid rgba(255,255,255,.75)}
+.motion-label{position:absolute;z-index:10;font:700 10px DM Mono,monospace;letter-spacing:.08em;background:rgba(255,253,248,.92);border:1px solid rgba(23,33,28,.1);border-radius:99px;padding:8px 10px;box-shadow:0 8px 18px rgba(23,33,28,.08);animation:label-float 4s ease-in-out infinite}
+.label-save{left:8%;top:13%}.label-prep{right:8%;top:45%;animation-delay:.8s}.label-cook{left:12%;bottom:12%;animation-delay:1.4s}.label-share{right:11%;bottom:12%;animation-delay:2s}
+.scene-status{position:absolute;z-index:12;left:50%;bottom:22px;transform:translateX(-50%);background:rgba(23,33,28,.9);color:white;border-radius:99px;padding:10px 14px;display:flex;gap:8px;align-items:center;white-space:nowrap;box-shadow:0 12px 25px rgba(23,33,28,.2)}
+.scene-status b{font-size:11px}.scene-status small{color:#aeb9b1;font-size:10px}.status-dot{width:7px;height:7px;border-radius:50%;background:#d7e75e;box-shadow:0 0 0 5px rgba(215,231,94,.12);animation:pulse 1.5s infinite}
+.recipe-scene.active-cook .dish-food{animation-duration:3s}.recipe-scene.active-cook .route-marker{animation-duration:1.3s}
+@keyframes plate-breathe{50%{transform:rotateX(62deg) translateY(-8px) rotateZ(2deg)}}@keyframes food-turn{to{transform:rotate(360deg)}}@keyframes orbit-drift{to{transform:rotateX(63deg) rotateZ(360deg)}}@keyframes steam{0%,100%{opacity:0;transform:translateY(15px) scale(.8)}35%{opacity:.7}70%{opacity:0;transform:translateY(-25px) scale(1.15)}}@keyframes glass-sway{50%{transform:rotate(-3deg) translateY(-8px)}}@keyframes label-float{50%{transform:translateY(-5px)}}@keyframes ingredient-tomato{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,42px)}}@keyframes ingredient-leaf{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-55px,60px) rotate(90deg)}}@keyframes ingredient-lemon{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-40px)}}@keyframes ingredient-pasta{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(55px,-65px) rotate(25deg)}}
+@media(max-width:820px){.recipe-scene{height:440px}.motion-label{font-size:8px;padding:6px 8px}.scene-status{bottom:12px}.glass-real{right:10%;top:20%}}
+@media(max-width:470px){.recipe-scene{height:360px}.recipe-plate{width:48%;left:26%;top:40%}.ingredient{transform:scale(.8)}.scene-status small{display:none}.motion-label{display:none}}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div class="shell nav">
+  <a class="brand" href="#home" data-page="home"><span class="brand-mark"><svg class="logo-3d" viewBox="0 0 48 48" aria-hidden="true">
+  <defs>
+    <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7e9"/>
+      <stop offset=".55" stop-color="#f3c768"/>
+      <stop offset="1" stop-color="#c66a42"/>
+    </linearGradient>
+    <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#cbd4cc"/>
+      <stop offset="1" stop-color="#7e8b83"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateG)" opacity=".96"/>
+  <ellipse cx="24" cy="24" rx="11.5" ry="7.5" fill="#fffaf0" opacity=".92"/>
+  <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12"
+        fill="none" stroke="url(#metalG)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round"/>
+</svg></span><span>Table & Tale</span></a>
+  <nav class="navlinks" id="navlinks">
+   <a href="#home" data-page="home">Home</a>
+   <a href="#recipes" data-page="recipes">Recipes</a>
+   <a href="#about" data-page="about">About</a>
+   <a href="#services" data-page="services">Services</a>
+   <a href="#dashboard" data-page="dashboard">Dashboard</a>
+   <a href="#contact" data-page="contact">Contact</a>
+  </nav>
+  <div class="navright"><button class="circle" onclick="alert('Demo search')">⌕</button><a class="btn dark" href="#login" data-page="login">Sign in</a><a class="btn accent signup-nav" href="#signup" data-page="signup">Sign up</a><button class="circle menu" id="menu">☰</button></div>
+ </div>
+</header>
+
+<main>
+<section id="home" class="page active">
+ <div class="hero-new"><div class="shell hero-layout">
+  <div>
+   <div class="kicker">FOOD COMMUNITY / 2026</div>
+   <h1>Cook <em>together.</em><br>Eat better.</h1>
+   <p class="lead">A new kind of food network for recipes you can trust, reviews you can use, and people who make the kitchen feel less like a task.</p>
+   <div class="hero-actions"><a class="btn dark" href="#recipes" data-page="recipes">Explore the table →</a><a class="btn light" href="#signup" data-page="signup">Join the table</a></div>
+  </div>
+  <div class="hero-art">
+   <div class="photo-main"><img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="People sharing a meal"></div>
+   <div class="art-sticker">REAL<br>FOOD<br>REAL PEOPLE</div>
+   <div class="floating-chip">● 2,184 cooks online</div>
+   <div class="art-note"><strong>4.9/5</strong><span>kitchen trust · based on member notes</span></div>
+  </div>
+ </div></div>
+ <div class="marquee"><div class="marquee-track"><span>recipes worth saving <b>✦</b></span><span>honest kitchen notes <b>✦</b></span><span>home cooks <b>✦</b></span><span>smart meal ideas <b>✦</b></span><span>recipes worth saving <b>✦</b></span><span>honest kitchen notes <b>✦</b></span><span>home cooks <b>✦</b></span><span>smart meal ideas <b>✦</b></span></div></div>
+
+ <section class="section"><div class="shell">
+  <div class="head"><div class="num">THE EDIT</div><h2>Not a recipe dump.<br>A point of view.</h2><p>We organize food around how people actually cook: the twenty-minute dinner, the friend coming over, the ingredient you need to use tonight.</p></div>
+  <div class="feature-row reveal">
+   <div class="feature-img"><img src="https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Friends eating together"><div class="feature-caption"><h3>The Sunday table</h3><p>A collection for slow meals, second helpings and recipes designed to be shared.</p></div></div>
+   <div class="side-stack"><div class="mini"><div class="mini-top"><span class="tag">QUICK / 20 MIN</span><span>↗</span></div><h3>What can I make before everyone arrives?</h3><p>Fast mains, simple sides and the shortcuts community cooks actually recommend.</p><span class="arrow">↘</span></div><div class="mini"><div class="mini-top"><span class="tag">COMMUNITY PICK</span><span>↗</span></div><h3>The recipes people remake.</h3><p>See what gets cooked again — not just what gets a five-star photo.</p><span class="arrow">↘</span></div></div>
+  </div>
+ </div></section>
+
+ <section class="section alt"><div class="shell"><div class="head center"><div class="num">DISCOVERY</div><h2>Three moods.<br>One hungry scroll.</h2><p>Different visual rhythm, same practical promise: find something you will actually cook.</p></div>
+  <div class="three-column reveal">
+   <article class="editor-card"><div class="meta"><span>COMFORT</span><span>48 recipes</span></div><div class="editor-img"><img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pasta"></div><h3>Big bowl energy.</h3><p>Warm, generous dishes for evenings when subtle is not the brief.</p></article>
+   <article class="editor-card"><div class="meta"><span>FRESH</span><span>62 recipes</span></div><div class="editor-img"><img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Fresh vegetables"></div><h3>Green, bright, alive.</h3><p>Produce-led meals that make the fridge look like a good decision.</p></article>
+   <article class="editor-card"><div class="meta"><span>SLOW</span><span>31 recipes</span></div><div class="editor-img"><img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Breakfast"></div><h3>Make Sunday longer.</h3><p>Brunch, baking and dishes that reward taking your time.</p></article>
+  </div>
+ </div></section>
+
+
+ <section class="section darksec"><div class="shell">
+  <div class="head center"><div class="num" style="color:#91a097">KITCHEN FLOW</div><h2>From idea to plate, live.</h2><p>A moving kitchen-flow tracker turns the cooking journey into a visual system.</p></div>
+  <div class="kitchen-flow reveal">
+   <div class="flow-head"><span class="flow-live"><i></i> LIVE KITCHEN FLOW</span><span>NOW COOKING · 860 MEMBERS</span></div>
+   <div class="flow-stage">
+    <div class="flow-track"><div class="flow-fill"></div><div class="flow-runner">🍳</div></div>
+    <div class="flow-stop s1"><b>01</b><span>Saved</span></div>
+    <div class="flow-stop s2"><b>02</b><span>Prepped</span></div>
+    <div class="flow-stop s3"><b>03</b><span>Cooking</span></div>
+    <div class="flow-stop s4"><b>04</b><span>Plated</span></div>
+    <div class="flow-stop s5"><b>05</b><span>Shared</span></div>
+   </div>
+   <div class="flow-cards">
+    <div><strong>12.8k</strong><span>recipes entering kitchens</span></div>
+    <div><strong>3.4k</strong><span>dishes currently cooking</span></div>
+    <div><strong>860</strong><span>reviews moving through the network</span></div>
+   </div>
+  </div>
+ </div></section>
+
+ <section class="section"><div class="shell float3d"><div class="scene recipe-scene reveal" id="recipeScene" aria-label="Interactive recipe to plate animation">
+  <div class="scene-grid"></div>
+  <div class="orbit orbit-a"><i></i></div>
+  <div class="orbit orbit-b"><i></i></div>
+  <div class="ingredient ing-tomato" data-name="Tomato"></div>
+  <div class="ingredient ing-leaf" data-name="Fresh herbs"></div>
+  <div class="ingredient ing-lemon" data-name="Lemon"></div>
+  <div class="ingredient ing-pasta" data-name="Pasta"></div>
+  <div class="recipe-plate">
+    <div class="plate-shadow"></div>
+    <div class="plate-rim"><div class="plate-inner">
+      <div class="dish-food">
+        <span class="food-piece f1"></span><span class="food-piece f2"></span>
+        <span class="food-piece f3"></span><span class="food-piece f4"></span>
+        <span class="herb h1"></span><span class="herb h2"></span><span class="herb h3"></span>
+      </div>
+    </div></div>
+  </div>
+  <div class="steam s1"></div><div class="steam s2"></div><div class="steam s3"></div>
+  <div class="glass glass-real"></div>
+  <div class="motion-label label-save">01 · SAVE</div>
+  <div class="motion-label label-prep">02 · PREP</div>
+  <div class="motion-label label-cook">03 · COOK</div>
+  <div class="motion-label label-share">04 · SHARE</div>
+  <div class="scene-status"><span class="status-dot"></span><b id="sceneStatus">Recipe selected</b><small id="sceneHint">Move across the table</small></div>
+</div><div class="big-copy"><div class="kicker">3D FLOATING TABLE</div><h2>A little more tactile.</h2><p>Move across the scene to guide the ingredients toward the plate. The table responds, the food turns, steam rises and the status changes from recipe idea to plated meal.</p><div class="bullet"><b>01</b><div><h4>Natural movement</h4><p>Depth and motion respond to your cursor instead of looping randomly.</p></div></div><div class="bullet"><b>02</b><div><h4>Food-first graphics</h4><p>No abstract blobs. Every visual element belongs to the kitchen.</p></div></div></div></div></section>
+
+ <section class="section"><div class="shell"><div class="parallax-new" id="parallax"><div class="layer food"></div><div class="layer table2"></div><div class="parallax-copy"><div><div class="kicker" style="color:var(--lime)">PARALLAX</div><h2>The table gets closer as you scroll.</h2><p>Layered food photography creates a cinematic pause between discovery and community.</p></div></div></div></div></section>
+
+ <section class="section alt"><div class="shell"><div class="head center"><div class="num">THE INVITATION</div><h2>Your kitchen has a seat here.</h2><p>Save a dish. Cook it. Tell us what happened. Help someone else decide what to make tonight.</p><a class="btn accent" href="#login" data-page="login">Create your profile →</a></div></div></section>
+</section>
+
+<section id="recipes" class="page">
+ <div class="page-hero-new"><div class="shell"><div class="kicker">RECIPES</div><h1>Recipes with a reason to exist.</h1><p>Curated collections built around actual cooking situations, not endless categories.</p></div></div>
+ <section class="section"><div class="shell"><div class="head"><div class="num">TODAY'S CUT</div><h2>Pick a mood.<br>We'll handle the scroll.</h2></div><div class="feature-row reveal"><div class="feature-img"><img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Pasta dish"><div class="feature-caption"><h3>Tonight's 30-minute hero</h3><p>One-pan pasta, crisp salad and a community-tested shortcut.</p></div></div><div class="side-stack"><div class="mini"><span class="tag">SAVEABLE</span><h3>Weeknight wins</h3><p>Short ingredient lists, realistic prep times and high repeat rates.</p><span class="arrow">↗</span></div><div class="mini"><span class="tag">WEEKEND</span><h3>Bring something to the table.</h3><p>Recipes designed to be passed around, not plated alone.</p><span class="arrow">↗</span></div></div></div></div></section>
+ <section class="section alt"><div class="shell"><div class="head center"><div class="num">THE INDEX</div><h2>Browse by real-life moment.</h2></div><div class="three-column"><article class="editor-card"><div class="editor-img"><img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Dinner"></div><h3>Friends are coming.</h3><p>Shareable mains, sides and low-stress hosting ideas.</p></article><article class="editor-card"><div class="editor-img"><img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Breakfast"></div><h3>Slow morning.</h3><p>Pancakes, eggs, coffee pairings and weekend rituals.</p></article><article class="editor-card"><div class="editor-img"><img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Vegetables"></div><h3>Use the fridge.</h3><p>Flexible vegetable-led recipes that welcome substitutions.</p></article></div></div></section>
+ <section class="section"><div class="shell head center"><div class="num">RECIPE NOTE</div><h2>Every recipe is better with context.</h2><p>Community notes show the pan size, substitutions, timing and texture details that a polished photo cannot.</p></div></section>
+</section>
+
+<section id="about" class="page">
+ <div class="page-hero-new"><div class="shell"><div class="kicker">ABOUT</div><h1>We built a food network around the part that matters: trust.</h1><p>Table & Tale is a community product for people who want better decisions in the kitchen and more human conversations around food.</p></div></div>
+ <section class="section"><div class="shell"><div class="feature-row"><div class="side-stack"><div class="mini"><span class="tag">WHY WE STARTED</span><h3>Too much inspiration. Not enough confidence.</h3><p>We wanted a place where a recipe's usefulness mattered more than how polished its thumbnail looked.</p></div><div class="mini"><span class="tag">OUR PRINCIPLE</span><h3>Useful before beautiful.</h3><p>Design should reduce uncertainty, not add another layer of noise.</p></div></div><div class="feature-img"><img src="https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="People sharing a meal"><div class="feature-caption"><h3>Built for real kitchens.</h3><p>Home cooks, reviewers, hosts and learners belong at the same table.</p></div></div></div></div></section>
+
+ <section class="section alt"><div class="shell">
+  <div class="head center"><div class="num">OUR JOURNEY</div><h2>Four moves behind every good idea.</h2><p>A compact animated path showing how Table & Tale turns cooking questions into useful community knowledge.</p></div>
+  <div class="journey-track">
+   <div class="journey-line"></div>
+   <article class="journey-item left"><div class="journey-card"><span>LISTEN</span><h3>Listen</h3><p>We started with the questions home cooks ask after the pretty photo.</p></div><div class="journey-node">01</div></article>
+   <article class="journey-item right"><div class="journey-card"><span>CURATE</span><h3>Curate</h3><p>We organize recipes around moments, time and real constraints.</p></div><div class="journey-node">02</div></article>
+   <article class="journey-item left"><div class="journey-card"><span>CONNECT</span><h3>Connect</h3><p>Reviews become useful conversations instead of isolated star ratings.</p></div><div class="journey-node">03</div></article>
+   <article class="journey-item right"><div class="journey-card"><span>IMPROVE</span><h3>Improve</h3><p>Every practical note makes the next cook a little more confident.</p></div><div class="journey-node">04</div></article>
+  </div>
+ </div></section>
+ <section class="section"><div class="shell"><div class="head center"><div class="num">THE FUTURE</div><h2>More people at the table.<br>Less noise around it.</h2><p>We're building tools for discovery, review, meal planning and community without turning food into a content treadmill.</p></div></div></section>
+</section>
+
+<section id="services" class="page">
+ <div class="page-hero-new"><div class="shell"><div class="kicker">SERVICES</div><h1>Four focused tools.<br>One calmer kitchen.</h1><p>Every feature has a job: discover, validate, plan or connect.</p></div></div>
+ <section class="section"><div class="shell"><div class="service-grid reveal"><article class="service-tile"><span class="number">DISCOVER</span><div><h3>Find the dish.</h3><p>Search by mood, time, ingredient and community response instead of scrolling a generic feed.</p></div><span class="service-arrow">↘</span></article><article class="service-tile"><span class="number">REVIEW</span><div><h3>Know before you cook.</h3><p>See what people actually changed, loved, disliked and would do differently.</p></div><span class="service-arrow">↘</span></article><article class="service-tile"><span class="number">PLAN</span><div><h3>Turn saves into dinner.</h3><p>Group recipes into a practical week plan and keep the next action visible.</p></div><span class="service-arrow">↘</span></article><article class="service-tile"><span class="number">CONNECT</span><div><h3>Cook with people.</h3><p>Join community rooms for hosting, home cooking, technique and ingredient ideas.</p></div><span class="service-arrow">↘</span></article></div></div></section>
+ <section class="section alt"><div class="shell"><div class="head"><div class="num">GLASS WORKSPACE</div><h2>A floating kitchen desk.</h2><p>A premium glassmorphism interaction turns planning into a visual workflow.</p></div><div class="glass-stage reveal"><div class="glass-ui"><div class="glass-panel tall"><span class="kicker">YOUR WEEK</span><h3>Three dinners.<br>Zero guesswork.</h3><p>Drag attention across the panels: saved recipe, community signal, shopping step.</p><div class="tiny-bars"><i></i><i></i><i></i><i></i><i></i></div></div><div class="glass-panel"><span class="kicker">SAVE</span><h3>28</h3><p>recipes in your kitchen list</p></div><div class="glass-panel"><span class="kicker">TRUST</span><h3>4.9</h3><p>average community signal</p></div></div></div></div></section>
+
+ <section class="section"><div class="shell">
+  <div class="head center"><div class="num">ANIMATED TIMELINE</div><h2>One clean path to dinner.</h2><p>Each service hands the next action a little more context.</p></div>
+  <div class="journey-track service-journey">
+   <div class="journey-line"></div>
+   <article class="journey-item left"><div class="journey-card"><span>DISCOVER</span><h3>Find it</h3><p>Choose a recipe that matches the moment, time and ingredients.</p></div><div class="journey-node">01</div></article>
+   <article class="journey-item right"><div class="journey-card"><span>VALIDATE</span><h3>Trust it</h3><p>Read practical notes before spending your ingredients and time.</p></div><div class="journey-node">02</div></article>
+   <article class="journey-item left"><div class="journey-card"><span>PLAN</span><h3>Place it</h3><p>Move the recipe into a focused weekly plan.</p></div><div class="journey-node">03</div></article>
+   <article class="journey-item right"><div class="journey-card"><span>SHARE</span><h3>Pass it on</h3><p>Leave a useful note for the next person at the table.</p></div><div class="journey-node">04</div></article>
+  </div>
+ </div></section>
+ <section class="section darksec"><div class="shell head center"><div class="num">DESIGNED TO SCALE</div><h2>From one dinner to a whole community.</h2><p>Authentication, profiles, workflows and admin controls can connect to your production backend when you are ready.</p></div></section>
+</section>
+
+
+<section id="dashboard" class="page">
+ <div class="dashboard-page">
+  <div class="dashboard-top"><div class="dashboard-brand"><span class="brand-mark"><svg class="logo-3d" viewBox="0 0 48 48" aria-hidden="true">
+  <defs>
+    <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7e9"/>
+      <stop offset=".55" stop-color="#f3c768"/>
+      <stop offset="1" stop-color="#c66a42"/>
+    </linearGradient>
+    <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#cbd4cc"/>
+      <stop offset="1" stop-color="#7e8b83"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateG)" opacity=".96"/>
+  <ellipse cx="24" cy="24" rx="11.5" ry="7.5" fill="#fffaf0" opacity=".92"/>
+  <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12"
+        fill="none" stroke="url(#metalG)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round"/>
+</svg></span><b>Table & Tale</b></div><div class="dashboard-actions"><span class="dashboard-user">Aria · Member</span><button class="btn light" onclick="showPage('home')">← Website</button><button class="btn accent" onclick="logoutDemo()">Logout</button></div></div>
+  <div class="dashboard-content">
+   <div class="dashboard-welcome"><div><div class="kicker">MEMBER DASHBOARD</div><h1>Your kitchen, in one view.</h1><p>Saved recipes, active plans and your latest kitchen notes — without extra screens.</p></div><button class="btn dark" onclick="alert('Demo: new meal plan created')">+ New meal plan</button></div>
+   <div class="dashboard-metrics-new"><div><span>SAVED RECIPES</span><strong>28</strong><small>+4 this week</small></div><div><span>MEAL PLANS</span><strong>4</strong><small>2 active now</small></div><div><span>REVIEWS</span><strong>14</strong><small>3 helpful this week</small></div><div><span>KITCHEN STREAK</span><strong>9</strong><small>days cooking</small></div></div>
+   <div class="dashboard-grid-new">
+    <section class="dash-panel"><div class="panel-title"><h2>Next on the table</h2><span>FRIDAY</span></div><div class="next-meal"><div class="next-img"><img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Pasta"></div><div><span class="kicker">DINNER / 30 MIN</span><h3>Herb pasta with roasted greens</h3><p>Saved from Weeknight Wins · 4.9 community signal</p><button class="btn dark" onclick="alert('Demo recipe opened')">Open recipe →</button></div></div></section>
+    <section class="dash-panel"><div class="panel-title"><h2>Recent activity</h2><span>LIVE</span></div><div class="dash-activity"><div><b>Green bowl</b><span>Saved · 12 min ago</span></div><div><b>Lemon cake</b><span>Review posted · 1 hr ago</span></div><div><b>Sunday roast</b><span>Added to plan · Yesterday</span></div><div><b>Tomato pasta</b><span>Cooked · Yesterday</span></div></div></section>
+   </div>
+   <section class="dash-panel quick-panel"><div class="panel-title"><h2>Quick actions</h2><span>YOUR SHORTCUTS</span></div><div class="quick-actions"><button onclick="alert('Demo: open saved recipes')">Saved recipes <b>→</b></button><button onclick="alert('Demo: open meal plans')">Meal plans <b>→</b></button><button onclick="alert('Demo: open reviews')">My reviews <b>→</b></button><button onclick="alert('Demo: account settings')">Account settings <b>→</b></button></div></section>
+  </div>
+ </div>
+</section>
+
+
+<section id="login" class="page auth-page">
+ <div class="auth-screen">
+  <div class="auth-box auth-premium">
+   <a class="auth-logo" href="#home" data-page="home"><span class="brand-mark"><svg class="logo-3d" viewBox="0 0 48 48" aria-hidden="true">
+  <defs>
+    <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7e9"/>
+      <stop offset=".55" stop-color="#f3c768"/>
+      <stop offset="1" stop-color="#c66a42"/>
+    </linearGradient>
+    <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#cbd4cc"/>
+      <stop offset="1" stop-color="#7e8b83"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateG)" opacity=".96"/>
+  <ellipse cx="24" cy="24" rx="11.5" ry="7.5" fill="#fffaf0" opacity=".92"/>
+  <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12"
+        fill="none" stroke="url(#metalG)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round"/>
+</svg></span><strong>Table & Tale</strong></a>
+   <div class="auth-visual-strip">
+    <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Pasta dish">
+    <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fresh food">
+    <img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Shared meal">
+   </div>
+   <div class="kicker">MEMBER ACCESS</div>
+   <h1>Welcome back.</h1>
+   <p>Save recipes, build meal plans and keep your kitchen notes together.</p>
+   <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+   <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+   <button class="btn dark" style="width:100%" onclick="alert('Demo sign-in successful')">Sign in →</button>
+   <div class="auth-or">or</div>
+   <button class="btn light" style="width:100%" onclick="alert('Demo Google sign-in')">Continue with Google</button>
+   <div class="auth-switch">New here? <a href="#signup" data-page="signup">Create an account →</a></div>
+  </div>
+ </div>
+</section>
+
+<section id="signup" class="page auth-page">
+ <div class="auth-screen">
+  <div class="auth-box auth-premium">
+   <a class="auth-logo" href="#home" data-page="home"><span class="brand-mark"><svg class="logo-3d" viewBox="0 0 48 48" aria-hidden="true">
+  <defs>
+    <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7e9"/>
+      <stop offset=".55" stop-color="#f3c768"/>
+      <stop offset="1" stop-color="#c66a42"/>
+    </linearGradient>
+    <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#cbd4cc"/>
+      <stop offset="1" stop-color="#7e8b83"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateG)" opacity=".96"/>
+  <ellipse cx="24" cy="24" rx="11.5" ry="7.5" fill="#fffaf0" opacity=".92"/>
+  <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12"
+        fill="none" stroke="url(#metalG)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round"/>
+</svg></span><strong>Table & Tale</strong></a>
+   <div class="auth-visual-strip">
+    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Breakfast">
+    <img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Dining table">
+    <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Pasta">
+   </div>
+   <div class="kicker">CREATE ACCOUNT</div>
+   <h1>Join the table.</h1>
+   <p>Build your profile and start saving, cooking and sharing.</p>
+   <div class="field"><label>Name</label><input placeholder="Your name"></div>
+   <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+   <div class="field"><label>Password</label><input type="password" placeholder="Create a password"></div>
+   <button class="btn accent" style="width:100%" onclick="alert('Demo account created')">Create account →</button>
+   <div class="auth-switch">Already a member? <a href="#login" data-page="login">Sign in →</a></div>
+  </div>
+ </div>
+</section>
+
+<section id="contact" class="page">
+ <div class="page-hero-new"><div class="shell"><div class="kicker">CONTACT</div><h1>Say hello. Tell us what is cooking.</h1><p>Dummy details below for this demo. Replace them with your real business information before launch.</p></div></div>
+ <section class="section"><div class="shell contact-new"><div class="contact-info-new"><div class="kicker" style="color:var(--lime)">TABLE & TALE HQ</div><h2>Let's talk.</h2><div class="contact-line"><small>Email</small><b>hello@tableandtale.example</b></div><div class="contact-line"><small>Phone</small><b>+91 90000 12345</b></div><div class="contact-line"><small>Address</small><b>24 Kitchen Street, Jubilee Hills, Hyderabad, Telangana 500033</b></div><div class="social-row"><a href="https://instagram.com" target="_blank">◎</a><a href="https://facebook.com" target="_blank">f</a><a href="https://youtube.com" target="_blank">▶</a><a href="https://x.com" target="_blank">𝕏</a></div><iframe class="map-new" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=78.39%2C17.41%2C78.45%2C17.45&layer=mapnik" title="Dummy Hyderabad map"></iframe></div><div class="form-card"><div class="kicker">CONTACT FORM</div><h2>Send a note.</h2><div class="field"><label>Name</label><input placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div><div class="field"><label>Message</label><textarea rows="8" placeholder="Tell us what you are cooking..."></textarea></div><button class="btn accent" style="width:100%" onclick="alert('Demo message submitted')">Send message →</button></div></div></section>
+</section>
+</main>
+
+
+<footer class="footer-new"><div class="shell footer-grid"><div><div class="brand"><span class="brand-mark"><svg class="logo-3d" viewBox="0 0 48 48" aria-hidden="true">
+  <defs>
+    <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7e9"/>
+      <stop offset=".55" stop-color="#f3c768"/>
+      <stop offset="1" stop-color="#c66a42"/>
+    </linearGradient>
+    <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#cbd4cc"/>
+      <stop offset="1" stop-color="#7e8b83"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateG)" opacity=".96"/>
+  <ellipse cx="24" cy="24" rx="11.5" ry="7.5" fill="#fffaf0" opacity=".92"/>
+  <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12"
+        fill="none" stroke="url(#metalG)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round"/>
+</svg></span><span>Table & Tale</span></div><p>A premium food community for recipes, reviews and real kitchen conversations.</p></div><div><b>Explore</b><a href="#recipes" data-page="recipes">Recipes</a><a href="#about" data-page="about">About</a><a href="#services" data-page="services">Services</a></div><div><b>Product</b><a href="#dashboard" data-page="dashboard">Dashboard</a><a href="#login" data-page="login">Sign in</a><a href="#signup" data-page="signup">Sign up</a></div><div><b>Company</b><a href="#contact" data-page="contact">Contact</a></div></div><div class="shell foot-bottom">© 2026 TABLE & TALE / DEMO WEBSITE / READY FOR GITHUB PAGES</div></footer>
+
+<script>
+const pages=[...document.querySelectorAll('.page')], links=[...document.querySelectorAll('[data-page]')];
+const nav=document.getElementById('navlinks'), menu=document.getElementById('menu');
+function showPage(name,push=true){
+ const target=document.getElementById(name)||document.getElementById('home');
+ pages.forEach(p=>p.classList.toggle('active',p===target));
+ document.querySelectorAll('.navlinks a').forEach(a=>a.classList.toggle('active',a.dataset.page===target.id));
+ document.body.classList.toggle('utility-page',['login','signup','dashboard'].includes(target.id));
+ nav.classList.remove('open'); window.scrollTo({top:0,behavior:'smooth'});
+ if(push && location.hash!=='#'+target.id) history.pushState({},'', '#'+target.id);
+ setTimeout(initReveal,80);
+}
+links.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showPage(a.dataset.page)}));
+menu.addEventListener('click',()=>nav.classList.toggle('open'));
+window.addEventListener('popstate',()=>showPage(location.hash.slice(1)||'home',false));
+showPage(location.hash.slice(1)||'home',false);
+
+function logoutDemo(){ showPage('login'); alert('Demo logout complete.'); }
+
+function initReveal(){
+ const els=document.querySelectorAll('.page.active .reveal');
+ const obs=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}}),{threshold:.12});
+ els.forEach(e=>obs.observe(e));
+}
+initReveal();
+
+const scene=document.querySelector('.scene');
+if(scene){
+ scene.addEventListener('pointermove',e=>{
+  const r=scene.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  scene.style.transform=`perspective(900px) rotateX(${y*-3}deg) rotateY(${x*4}deg)`;
+ });
+ scene.addEventListener('pointerleave',()=>scene.style.transform='');
+}
+const para=document.getElementById('parallax');
+window.addEventListener('scroll',()=>{
+ if(para && document.getElementById('home').classList.contains('active')){
+  const r=para.getBoundingClientRect(),v=Math.max(-35,Math.min(35,-r.top*.07));
+  para.querySelector('.food').style.transform=`translateY(${v}px) scale(1.08)`;
+  para.querySelector('.table2').style.setProperty('--p2',v*.5+'px');
+ }
+});
+
+const recipeScene=document.getElementById('recipeScene');
+if(recipeScene){
+  const status=recipeScene.querySelector('#sceneStatus');
+  const hint=recipeScene.querySelector('#sceneHint');
+  const labels=[
+    ['Recipe selected','Move across the table'],
+    ['Ingredients moving','Guide dinner toward the plate'],
+    ['Cooking in progress','Steam rising — almost ready'],
+    ['Plate ready','Share the result with the community']
+  ];
+  let active=0;
+  const setState=i=>{
+    active=i%labels.length;
+    if(status) status.textContent=labels[active][0];
+    if(hint) hint.textContent=labels[active][1];
+    recipeScene.classList.toggle('active-cook',active===2);
+  };
+  recipeScene.addEventListener('pointermove',e=>{
+    const r=recipeScene.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    recipeScene.style.transform=`perspective(1000px) rotateX(${y*-3}deg) rotateY(${x*4}deg)`;
+    const zone=x+y;
+    if(zone>.35) setState(3); else if(x>.05) setState(2); else if(y>0) setState(1); else setState(0);
+  });
+  recipeScene.addEventListener('pointerleave',()=>{
+    recipeScene.style.transform='';
+    setState(0);
+  });
+}
+
+</script>
+</body>
+</html>

@@ -231,10 +231,10 @@
     }
 
     .kicker {
-      font: 500 11px/1 DM Mono, monospace;
+      font: 600 12px/1 DM Mono, monospace;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: #737c73
+      color: #636e64
     }
 
     .hero-new h1 {
@@ -333,8 +333,9 @@
     }
 
     .art-note span {
-      font-size: 12px;
-      color: var(--muted)
+      font-size: 13px;
+      font-weight: 500;
+      color: #556157
     }
 
     .floating-chip {
@@ -400,8 +401,8 @@
     }
 
     .head .num {
-      font: 500 11px DM Mono, monospace;
-      color: #8a9189;
+      font: 600 12px DM Mono, monospace;
+      color: #6a746b;
       letter-spacing: .15em
     }
 
@@ -478,10 +479,11 @@
       border: 1px solid var(--line);
       background: #fffdf8;
       border-radius: 28px;
-      padding: 25px;
+      padding: 30px 28px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 10px;
       overflow: hidden;
       transition: .35s
     }
@@ -493,37 +495,38 @@
 
     .mini .mini-top {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center
     }
 
     .mini .tag {
-      font: 500 10px DM Mono, monospace;
-      color: #727b73
+      font: 600 12px DM Mono, monospace;
+      color: #58655a;
+      letter-spacing: .06em
     }
 
     .mini h3 {
-      font: 500 32px/1 Playfair Display, serif;
-      margin: 12px 0
+      font: 600 32px/1.1 Playfair Display, serif;
+      margin: 4px 0 8px
     }
 
     .mini p {
-      color: var(--muted);
+      color: #556057;
       line-height: 1.6;
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 500;
       margin: 0
     }
 
     .mini .arrow {
-      font-size: 25px;
-      align-self: flex-end;
-      color: var(--accent)
+      display: none !important
     }
 
     .three-column {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px
+      gap: 18px;
+      align-items: stretch;
     }
 
     .editor-card {
@@ -531,7 +534,11 @@
       border: 1px solid var(--line);
       border-radius: 25px;
       padding: 17px;
-      transition: .35s
+      transition: .35s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
     }
 
     .editor-card:hover {
@@ -569,8 +576,8 @@
     .meta {
       display: flex;
       justify-content: space-between;
-      color: #879087;
-      font: 500 10px DM Mono, monospace;
+      color: #657267;
+      font: 600 12px DM Mono, monospace;
       margin-bottom: 11px;
       text-transform: uppercase
     }
@@ -609,9 +616,9 @@
       display: flex;
       gap: 8px;
       align-items: center;
-      font: 500 11px DM Mono, monospace;
+      font: 600 12px DM Mono, monospace;
       text-transform: uppercase;
-      color: #cbd5ce
+      color: #e2ece5
     }
 
     .live-dot {
@@ -678,8 +685,9 @@
 
     .route-label span {
       display: block;
-      color: #9fac9f;
-      font-size: 12px;
+      color: #b8c8ba;
+      font-size: 13px;
+      font-weight: 500;
       margin-top: 5px
     }
 
@@ -706,8 +714,9 @@
     }
 
     .stat span {
-      font-size: 11px;
-      color: #758077
+      font-size: 12px;
+      font-weight: 600;
+      color: #58645a
     }
 
     .float3d {
@@ -858,15 +867,15 @@
     }
 
     .layer.food {
-      background-image: linear-gradient(rgba(23, 33, 28, .35), rgba(23, 33, 28, .62)), url("https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=2000")
+      background-image: linear-gradient(rgba(14, 22, 18, .62), rgba(14, 22, 18, .78)), url("https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=2000")
     }
 
     .layer.table2 {
       inset: auto 4% -10% 4%;
       height: 55%;
-      background-image: url("https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1600");
+      background-image: linear-gradient(rgba(14, 22, 18, .45), rgba(14, 22, 18, .65)), url("https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1600");
       border-radius: 40px 40px 0 0;
-      opacity: .82;
+      opacity: .88;
       transform: translateY(var(--p2, 0))
     }
 
@@ -881,17 +890,42 @@
       padding: 30px
     }
 
+    .parallax-copy > div {
+      background: rgba(14, 22, 18, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 30px;
+      padding: 44px 50px;
+      max-width: 860px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6)
+    }
+
+    .parallax-copy .kicker {
+      color: var(--lime) !important;
+      font: 700 13px DM Mono, monospace;
+      letter-spacing: .16em;
+      margin-bottom: 14px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5)
+    }
+
     .parallax-copy h2 {
-      font: 500 clamp(48px, 6vw, 86px)/.92 Playfair Display, serif;
-      letter-spacing: -.055em;
-      margin: 0 0 15px;
-      max-width: 850px
+      font: 600 clamp(44px, 5.5vw, 78px)/.96 Playfair Display, serif;
+      letter-spacing: -.045em;
+      margin: 0 0 16px;
+      max-width: 850px;
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7)
     }
 
     .parallax-copy p {
       max-width: 620px;
       line-height: 1.7;
-      color: #e1e8e2
+      color: #f1f7f3;
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 auto;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6)
     }
 
     .page-hero-new {
@@ -934,65 +968,117 @@
     .service-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px
+      gap: 28px;
+      max-width: 1140px;
+      margin: 0 auto;
     }
 
     .service-tile {
-      min-height: 380px;
-      border-radius: 30px;
-      padding: 30px;
       background: #fffdf8;
       border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px 24px 28px;
+      box-shadow: 0 10px 30px rgba(23, 33, 28, .05);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      transition: all .35s ease;
       position: relative;
-      overflow: hidden;
-      transition: .35s
     }
 
     .service-tile:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow)
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(23, 33, 28, .12);
+      border-color: #c7c6ba;
     }
 
-    .service-tile:nth-child(2) {
-      background: var(--dark);
-      color: white
+    .service-card-img {
+      width: 100%;
+      height: 230px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      background: #ebe7de;
+      box-shadow: 0 4px 14px rgba(23, 33, 28, .06);
     }
 
-    .service-tile:nth-child(2) p {
-      color: #abb7af
+    .service-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s cubic-bezier(.25, 1, .5, 1);
     }
 
-    .service-tile:nth-child(3) {
-      background: var(--lime)
+    .service-tile:hover .service-card-img img {
+      transform: scale(1.06);
     }
 
-    .service-tile:nth-child(4) {
-      background: var(--blue)
-    }
-
-    .service-tile .number {
-      font: 500 12px DM Mono, monospace
+    .service-eyebrow {
+      font: 800 12px/1 'DM Mono', monospace;
+      letter-spacing: .12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      background: rgba(216, 95, 66, .09);
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin: 0 auto 12px;
+      display: inline-block;
     }
 
     .service-tile h3 {
-      font: 500 45px/.98 Playfair Display, serif;
-      max-width: 400px;
-      margin: 0 0 13px
+      font: 700 32px/1.2 'Playfair Display', serif;
+      color: var(--ink);
+      margin: 0 auto 10px;
+      text-align: center;
+      max-width: 440px;
     }
 
-    .service-tile p {
-      max-width: 430px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 0
+    .service-subtext {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.65;
+      color: #303d33;
+      margin: 0 auto 22px;
+      max-width: 440px;
+      text-align: center;
     }
 
-    .service-tile .service-arrow {
-      font-size: 34px;
-      align-self: flex-end
+    .service-action {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 4px;
+    }
+
+    .service-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 26px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-radius: 99px;
+      background: #ffffff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      box-shadow: 0 2px 6px rgba(23, 33, 28, .04);
+      transition: all .25s ease;
+      text-decoration: none;
+    }
+
+    .service-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(216, 95, 66, .26);
+    }
+
+    .service-arrow {
+      display: none !important;
     }
 
     .glass-stage {
@@ -1195,8 +1281,8 @@
     }
 
     .review-feature small {
-      color: #aeb9b1;
-      font: 500 11px DM Mono, monospace
+      color: #c4d0c7;
+      font: 600 12px DM Mono, monospace
     }
 
     .review-list {
@@ -1259,8 +1345,9 @@
     }
 
     .topic span {
-      color: var(--muted);
-      font-size: 12px
+      color: #556257;
+      font-size: 13px;
+      font-weight: 500
     }
 
     .community-wall {
@@ -1273,12 +1360,13 @@
 
     .post {
       position: absolute;
-      width: 190px;
+      width: 200px;
       background: #fffdf8;
       border-radius: 18px;
       padding: 16px;
       box-shadow: 0 20px 35px rgba(23, 33, 28, .13);
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 500;
       line-height: 1.5;
       animation: postfloat 5s ease-in-out infinite
     }
@@ -1397,8 +1485,9 @@
     }
 
     .dash-metric span {
-      font-size: 11px;
-      color: #758077
+      font-size: 13px;
+      font-weight: 600;
+      color: #5d685f
     }
 
     .dash-metric b {
@@ -1428,11 +1517,11 @@
     .status {
       display: inline-flex;
       justify-self: start;
-      padding: 5px 9px;
+      padding: 5px 11px;
       border-radius: 99px;
       background: #dcebd9;
-      color: #45664d;
-      font-size: 10px;
+      color: #2e4a35;
+      font-size: 12px;
       font-weight: 800
     }
 
@@ -1502,7 +1591,7 @@
 
     .field label {
       display: block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: .08em;
@@ -1552,8 +1641,8 @@
 
     .contact-line small {
       display: block;
-      color: #8e9a92;
-      font: 500 10px DM Mono, monospace;
+      color: #b0bfb4;
+      font: 600 12px DM Mono, monospace;
       text-transform: uppercase;
       margin-bottom: 6px
     }
@@ -1630,7 +1719,8 @@
       color: #fff;
       padding: 10px 16px;
       border-radius: 99px;
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -1749,8 +1839,9 @@
     }
 
     .foot-news-note {
-      color: #6f7a73;
-      font-size: 11px;
+      color: #92a297;
+      font-size: 12px;
+      font-weight: 500;
       margin: 0
     }
 
@@ -1758,8 +1849,8 @@
       border-top: 1px solid rgba(255, 255, 255, .1);
       margin-top: 45px;
       padding-top: 18px;
-      color: #6f7a73;
-      font: 500 10px DM Mono, monospace
+      color: #9db0a3;
+      font: 500 12px DM Mono, monospace
     }
 
     .reveal {
@@ -1868,8 +1959,9 @@
 
     @media(max-width:1080px) {
       .navlinks a {
-        padding: 10px 7px;
-        font-size: 12px
+        padding: 10px 8px;
+        font-size: 13px;
+        font-weight: 600
       }
 
       .navright>.dark {
@@ -2030,9 +2122,15 @@
         padding: 70px 0
       }
 
-      .feature-row,
+      .feature-row {
+        grid-template-columns: 1fr;
+      }
+
       .service-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
+        max-width: 580px;
+        margin: 0 auto;
+        gap: 24px;
       }
 
       .feature-img {
@@ -2140,9 +2238,10 @@
       }
 
       .art-sticker {
-        width: 90px;
-        height: 90px;
-        font-size: 10px
+        width: 96px;
+        height: 96px;
+        font-size: 12px;
+        font-weight: 800
       }
 
       .art-note {
@@ -2151,7 +2250,8 @@
 
       .floating-chip {
         right: 4%;
-        font-size: 10px
+        font-size: 12px;
+        font-weight: 700
       }
 
       .section {
@@ -2170,20 +2270,34 @@
         grid-template-columns: 1fr
       }
 
-      .service-tile {
-        min-height: 330px
+      .service-card-img {
+        height: 185px;
+        margin-bottom: 16px;
       }
 
       .service-tile h3 {
-        font-size: 38px
+        font-size: 25px;
+      }
+
+      .service-subtext {
+        font-size: 14px;
+        margin-bottom: 18px;
       }
 
       .parallax-new {
-        height: 440px
+        height: 460px
+      }
+
+      .parallax-copy > div {
+        padding: 30px 22px
       }
 
       .parallax-copy h2 {
-        font-size: 48px
+        font-size: clamp(32px, 6vw, 44px)
+      }
+
+      .parallax-copy p {
+        font-size: 15px
       }
 
       .login-art {
@@ -2265,7 +2379,7 @@
     }
 
     .mini .arrow {
-      align-self: center
+      display: none !important
     }
 
     .editor-card {
@@ -2318,10 +2432,6 @@
 
     .service-tile {
       text-align: center
-    }
-
-    .service-tile .service-arrow {
-      align-self: center
     }
 
     .page-hero-new {
@@ -2382,42 +2492,46 @@
       justify-content: space-between;
       align-items: center;
       gap: 15px;
-      color: #a3b2a8;
-      font: 600 11px/1 DM Mono, monospace;
+      color: #b8ccbe;
+      font: 600 13px/1.2 DM Mono, monospace;
       letter-spacing: .08em;
       position: relative;
       z-index: 2;
       padding-bottom: 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, .08)
+      border-bottom: 1px solid rgba(255, 255, 255, .1)
     }
 
     .flow-live {
-      color: #e4ede7;
+      color: #f0f7f3;
+      font-size: 13px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 9px;
-      background: rgba(255, 255, 255, .06);
-      padding: 6px 12px;
+      background: rgba(255, 255, 255, .08);
+      padding: 7px 14px;
       border-radius: 99px;
-      border: 1px solid rgba(255, 255, 255, .1)
+      border: 1px solid rgba(255, 255, 255, .15)
     }
 
     .flow-live i {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: #6de18b;
-      box-shadow: 0 0 0 6px rgba(109, 225, 139, .18);
+      box-shadow: 0 0 0 6px rgba(109, 225, 139, .22);
       animation: pulse 1.7s infinite
     }
 
     .flow-meta-pill {
       color: #d7e75e;
-      background: rgba(215, 231, 94, .1);
-      border: 1px solid rgba(215, 231, 94, .2);
-      padding: 6px 12px;
+      background: rgba(215, 231, 94, .14);
+      border: 1px solid rgba(215, 231, 94, .28);
+      padding: 7px 14px;
       border-radius: 99px;
-      font-size: 10px
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em
     }
 
     .flow-stage {
@@ -2515,11 +2629,11 @@
     }
 
     .step-num {
-      font: 600 11px DM Mono, monospace;
-      color: #9ab0a2;
+      font: 600 12px DM Mono, monospace;
+      color: #b2c7bb;
       letter-spacing: .08em;
       display: block;
-      margin-bottom: 2px
+      margin-bottom: 3px
     }
 
     .flow-step.active-step .step-num {
@@ -2527,46 +2641,51 @@
     }
 
     .step-name {
-      font: 700 15px Manrope, sans-serif;
+      font: 700 17px Manrope, sans-serif;
       color: #ffffff;
       display: block
     }
 
     .step-desc {
-      font: 400 11px Manrope, sans-serif;
-      color: #86978c;
+      font: 500 13px/1.4 Manrope, sans-serif;
+      color: #c0d3c7;
       display: block;
-      margin-top: 2px
+      margin-top: 3px
     }
 
     .step-tag {
       display: inline-block;
-      margin-top: 5px;
-      padding: 2px 8px;
+      margin-top: 6px;
+      padding: 4px 10px;
       border-radius: 99px;
-      background: rgba(215, 231, 94, .16);
+      background: rgba(215, 231, 94, .2);
       color: var(--lime);
-      font: 700 9px DM Mono, monospace
+      font: 700 12px DM Mono, monospace
     }
 
     .flow-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 18px;
       position: relative;
       z-index: 2;
-      margin-top: 32px
+      margin-top: 32px;
+      align-items: stretch;
     }
 
     .flow-card {
       background: rgba(255, 255, 255, .05);
       border: 1px solid rgba(255, 255, 255, .1);
       border-radius: 22px;
-      padding: 22px 24px;
+      padding: 24px 24px 22px;
       backdrop-filter: blur(12px);
       transition: all .35s ease;
       position: relative;
-      overflow: hidden
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
     }
 
     .flow-card:hover {
@@ -2585,24 +2704,30 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px
+      margin-bottom: 12px;
+      min-height: 28px;
     }
 
     .flow-card-step {
-      font: 600 10px DM Mono, monospace;
+      font: 700 12px DM Mono, monospace;
       letter-spacing: .08em;
-      color: #9ab0a2
+      color: #c2d6cb;
+      line-height: 1.2;
     }
 
     .flow-card-icon {
-      font-size: 20px
+      font-size: 22px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .flow-card strong {
-      font: 600 34px/1 Playfair Display, serif;
+      font: 700 38px/1 Playfair Display, serif;
       color: #fff;
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       letter-spacing: -.02em
     }
 
@@ -2611,28 +2736,51 @@
     }
 
     .flow-card p {
-      color: #a5b5ab;
-      font-size: 12px;
-      line-height: 1.55;
-      margin: 0 0 14px
+      color: #e4f1e9;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0 0 16px;
+      flex: 1 1 auto;
+      min-height: 48px;
+      display: flex;
+      align-items: flex-start;
     }
 
     .flow-card-foot {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid rgba(255, 255, 255, .08);
-      padding-top: 10px;
-      font: 500 10px DM Mono, monospace;
-      color: #7e8f84
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      padding-top: 14px;
+      margin-top: auto;
+      font: 700 12px DM Mono, monospace;
+      color: #b8ccc1;
+      width: 100%;
+      min-height: 42px;
+      box-sizing: border-box;
     }
 
     .flow-card-pill {
       color: var(--lime);
-      background: rgba(215, 231, 94, .12);
-      padding: 2px 8px;
+      background: rgba(215, 231, 94, .16);
+      padding: 5px 12px;
       border-radius: 99px;
-      font-weight: 700
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.3;
+    }
+
+    .flow-card-foot small {
+      font-size: 12px;
+      font-weight: 600;
+      color: #d2e4da;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1.3;
     }
 
     .journey-track {
@@ -2658,7 +2806,12 @@
       display: grid;
       grid-template-columns: 1fr 90px 1fr;
       align-items: center;
-      min-height: 150px
+      min-height: 155px;
+      margin-bottom: 14px
+    }
+
+    .journey-item:last-child {
+      margin-bottom: 0
     }
 
     .journey-card {
@@ -2679,8 +2832,8 @@
     }
 
     .journey-card span {
-      font: 500 10px DM Mono, monospace;
-      color: #7c857d;
+      font: 600 12px DM Mono, monospace;
+      color: #556257;
       letter-spacing: .12em
     }
 
@@ -2690,9 +2843,10 @@
     }
 
     .journey-card p {
-      color: #70786f;
-      line-height: 1.55;
-      font-size: 13px;
+      color: #556057;
+      line-height: 1.6;
+      font-size: 14px;
+      font-weight: 500;
       margin: 0
     }
 
@@ -2704,7 +2858,7 @@
       color: #fff;
       display: grid;
       place-items: center;
-      font: 700 11px DM Mono, monospace;
+      font: 700 12px DM Mono, monospace;
       box-shadow: 0 0 0 10px rgba(216, 95, 66, .1);
       z-index: 2;
       animation: nodepulse 2.5s infinite
@@ -2770,8 +2924,9 @@
     }
 
     .dashboard-user {
-      font-size: 12px;
-      color: #69746c;
+      font-size: 13px;
+      font-weight: 600;
+      color: #49544c;
       margin-right: 7px
     }
 
@@ -2826,8 +2981,8 @@
     }
 
     .dashboard-metrics-new span {
-      font: 500 10px DM Mono, monospace;
-      color: #7b857c
+      font: 600 12px DM Mono, monospace;
+      color: #58645a
     }
 
     .dashboard-metrics-new strong {
@@ -2837,7 +2992,9 @@
     }
 
     .dashboard-metrics-new small {
-      color: #6f7a72
+      font-size: 13px;
+      font-weight: 500;
+      color: #58645a
     }
 
     .dashboard-grid-new {
@@ -2867,8 +3024,8 @@
     }
 
     .panel-title span {
-      font: 500 9px DM Mono, monospace;
-      color: #7c867e
+      font: 600 12px DM Mono, monospace;
+      color: #58645a
     }
 
     .next-meal {
@@ -2886,9 +3043,10 @@
     }
 
     .next-meal p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 12px
+      color: #556057;
+      line-height: 1.6;
+      font-size: 14px;
+      font-weight: 500
     }
 
     .next-meal h3 {
@@ -2907,7 +3065,8 @@
       gap: 12px;
       padding: 15px 0;
       border-bottom: 1px solid var(--line);
-      font-size: 12px
+      font-size: 13px;
+      font-weight: 500
     }
 
     .dash-activity div:last-child {
@@ -2915,7 +3074,8 @@
     }
 
     .dash-activity span {
-      color: #7a847d
+      color: #556057;
+      font-weight: 500
     }
 
     .quick-panel {
@@ -2945,7 +3105,7 @@
     }
 
     .quick-actions b {
-      float: right
+      display: none !important
     }
 
     .auth-page {
@@ -2998,19 +3158,217 @@
     }
 
     .auth-box .field {
-      text-align: left
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .pw-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .pw-wrap input {
+      width: 100%;
+      padding-right: 48px !important;
+    }
+
+    .pw-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      padding: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #6d7770;
+      border-radius: 8px;
+      transition: color .2s, background .2s;
+    }
+
+    .pw-toggle:hover {
+      color: var(--ink);
+      background: rgba(23, 33, 28, .07);
+    }
+
+    .pw-toggle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .pw-toggle svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+      pointer-events: none;
+    }
+
+    .auth-row-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: -2px 0 16px;
+      text-align: left;
+    }
+
+    .auth-remember-row {
+      margin: 10px 0 16px;
+    }
+
+    .check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #49544c;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .check-label input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      margin: 0;
+      accent-color: var(--accent);
+      cursor: pointer;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .forgot-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color .2s, text-decoration .2s;
+      white-space: nowrap;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+      color: #b54930;
+    }
+
+    .auth-terms {
+      text-align: left;
+      margin: 6px 0 4px;
+      line-height: 1.5;
+    }
+
+    .auth-terms .check-label {
+      align-items: flex-start;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #4f5a52;
+    }
+
+    .auth-terms .check-label input[type="checkbox"] {
+      margin-top: 2px;
+    }
+
+    .terms-link {
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .terms-link:hover {
+      color: var(--accent);
+    }
+
+    .auth-divider {
+      position: relative;
+      text-align: center;
+      margin: 18px 0 14px;
+    }
+
+    .auth-divider::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+      z-index: 1;
+    }
+
+    .auth-divider span {
+      position: relative;
+      z-index: 2;
+      background: #fffdf8;
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #6a766c;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .auth-social-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 0 0 6px;
+    }
+
+    .btn-social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .25s ease;
+      box-shadow: 0 2px 6px rgba(23, 33, 28, .04);
+      outline: none;
+    }
+
+    .btn-social:hover {
+      background: #fbfaf5;
+      border-color: #b8b7a8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(23, 33, 28, .08);
+    }
+
+    .btn-social:active {
+      transform: translateY(0);
+    }
+
+    .btn-social svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      display: block;
     }
 
     .auth-or {
-      color: #8a928b;
+      color: #6a766c;
       margin: 16px 0;
-      font-size: 11px
+      font-size: 13px;
+      font-weight: 600
     }
 
     .auth-switch {
       margin-top: 18px;
-      font-size: 12px;
-      color: #7a847d
+      font-size: 13px;
+      font-weight: 500;
+      color: #5a665d
     }
 
     .auth-switch a {
@@ -3094,8 +3452,13 @@
 
       .flow-cards {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 14px;
         margin-top: 24px
+      }
+
+      .flow-card p {
+        min-height: auto;
+        margin-bottom: 12px
       }
 
       .journey-track {
@@ -3103,14 +3466,21 @@
       }
 
       .journey-line {
-        left: 23px
+        left: 23px;
+        top: 25px;
+        bottom: 25px
       }
 
       .journey-item {
         display: grid;
         grid-template-columns: 46px 1fr;
-        min-height: 145px;
-        gap: 12px
+        min-height: auto;
+        gap: 16px;
+        margin-bottom: 26px
+      }
+
+      .journey-item:last-child {
+        margin-bottom: 0
       }
 
       .journey-item.left .journey-card,
@@ -3188,11 +3558,13 @@
       }
 
       .step-num {
-        font-size: 9px
+        font-size: 12px;
+        font-weight: 600
       }
 
       .step-name {
-        font-size: 11px
+        font-size: 13px;
+        font-weight: 700
       }
 
       .step-tag {
@@ -3236,6 +3608,32 @@
         font-size: 42px
       }
 
+      .journey-track {
+        padding: 0 0 0 42px
+      }
+
+      .journey-line {
+        left: 20px;
+        top: 22px;
+        bottom: 22px
+      }
+
+      .journey-item {
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+        margin-bottom: 20px
+      }
+
+      .journey-item:last-child {
+        margin-bottom: 0
+      }
+
+      .journey-node {
+        width: 42px;
+        height: 42px;
+        font-size: 12px
+      }
+
       .journey-card {
         padding: 20px 16px
       }
@@ -3246,65 +3644,7 @@
     }
 
 
-    .service-tile {
-      isolation: isolate;
-      min-height: 350px
-    }
 
-    .service-tile::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background-position: center;
-      background-size: cover;
-      transform: scale(1.02);
-      transition: transform .7s ease, filter .7s ease
-    }
-
-    .service-tile::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(180deg, rgba(17, 29, 23, .12), rgba(17, 29, 23, .78))
-    }
-
-    .service-tile:hover::before {
-      transform: scale(1.08)
-    }
-
-    .service-tile:nth-child(1)::before {
-      background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200")
-    }
-
-    .service-tile:nth-child(2)::before {
-      background-image: url("https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1200")
-    }
-
-    .service-tile:nth-child(3)::before {
-      background-image: url("https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1200")
-    }
-
-    .service-tile:nth-child(4)::before {
-      background-image: url("https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1200")
-    }
-
-    .service-tile:nth-child(n) {
-      color: #fff
-    }
-
-    .service-tile:nth-child(n) p {
-      color: rgba(255, 255, 255, .82)
-    }
-
-    .service-tile:nth-child(n) .number {
-      color: rgba(255, 255, 255, .78)
-    }
-
-    .service-tile:nth-child(n) .service-arrow {
-      color: #fff
-    }
 
 
     .logo-3d {
@@ -3352,11 +3692,15 @@
     }
 
     .service-tile h3 {
-      font-size: clamp(34px, 3.8vw, 48px)
+      font-size: clamp(26px, 2.8vw, 34px);
+      font-weight: 700;
     }
 
+    .service-tile .service-subtext,
     .service-tile p {
-      font-size: 14px
+      font-size: 15px;
+      font-weight: 600;
+      color: #303d33;
     }
 
     .auth-page {
@@ -3376,20 +3720,43 @@
     .auth-logo {
       position: static;
       transform: none;
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
       margin: 0 auto 18px;
-      gap: 10px
+      gap: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .auth-logo:hover {
+      opacity: .88;
     }
 
     .auth-logo .brand-mark {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 8px 22px rgba(216, 95, 66, .25);
     }
 
     .auth-logo .logo-3d {
-      width: 40px;
-      height: 40px
+      width: 28px;
+      height: 28px;
+    }
+
+    .auth-logo span {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--ink);
     }
 
     .auth-visual-strip {
@@ -3482,13 +3849,14 @@
       }
 
       .auth-logo .brand-mark {
-        width: 50px;
-        height: 50px
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
       }
 
       .auth-logo .logo-3d {
-        width: 36px;
-        height: 36px
+        width: 28px;
+        height: 28px;
       }
 
       .auth-visual-strip {
@@ -3506,7 +3874,8 @@
       }
 
       .map-badge {
-        font-size: 10px;
+        font-size: 12px;
+        font-weight: 600;
         padding: 7px 12px;
         left: 12px;
         top: 12px
@@ -3709,8 +4078,8 @@
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 99px;
-      padding: 4px 9px;
-      font: 700 9px DM Mono, monospace;
+      padding: 5px 11px;
+      font: 700 12px DM Mono, monospace;
       color: #fff;
       opacity: 0;
       pointer-events: none;
@@ -3863,13 +4232,13 @@
     .motion-label {
       position: absolute;
       z-index: 10;
-      font: 700 10px DM Mono, monospace;
+      font: 700 12px DM Mono, monospace;
       letter-spacing: .06em;
       background: rgba(255, 255, 255, .9);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(23, 33, 28, .1);
       border-radius: 99px;
-      padding: 6px 13px;
+      padding: 7px 14px;
       box-shadow: 0 6px 18px rgba(23, 33, 28, .08);
       display: inline-flex;
       align-items: center;
@@ -3954,19 +4323,20 @@
     }
 
     .scene-status b {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 700;
       color: #fff
     }
 
     .scene-status small {
-      color: #b6c3b8;
-      font-size: 10px
+      color: #d2ddd4;
+      font-size: 12px;
+      font-weight: 500
     }
 
     .status-sep {
-      opacity: .35;
-      font-size: 10px
+      opacity: .5;
+      font-size: 12px
     }
 
     .status-dot {
@@ -4000,9 +4370,9 @@
       background: rgba(216, 95, 66, .08);
       border: 1px solid rgba(216, 95, 66, .2);
       color: var(--accent);
-      padding: 5px 14px;
+      padding: 6px 14px;
       border-radius: 99px;
-      font: 700 10px DM Mono, monospace;
+      font: 700 12px DM Mono, monospace;
       letter-spacing: .1em;
       margin-bottom: 16px
     }
@@ -4207,8 +4577,8 @@
       }
 
       .motion-label {
-        font-size: 8px;
-        padding: 5px 8px
+        font-size: 12px;
+        padding: 5px 10px
       }
 
       .scene-status {
@@ -4293,7 +4663,7 @@
             <h1>Cook <em>together.</em><br>Eat better.</h1>
             <p class="lead">A new kind of food network for recipes you can trust, reviews you can use, and people who
               make the kitchen feel less like a task.</p>
-            <div class="hero-actions"><a class="btn dark" href="#recipes" data-page="recipes">Explore the table →</a><a
+            <div class="hero-actions"><a class="btn dark" href="#recipes" data-page="recipes">Explore the table</a><a
                 class="btn light" href="#signup" data-page="signup">Join the table</a></div>
           </div>
           <div class="hero-art">
@@ -4332,15 +4702,14 @@
             </div>
             <div class="side-stack">
               <div class="mini">
-                <div class="mini-top"><span class="tag">QUICK / 20 MIN</span><span>↗</span></div>
+                <div class="mini-top"><span class="tag">QUICK / 20 MIN</span></div>
                 <h3>What can I make before everyone arrives?</h3>
-                <p>Fast mains, simple sides and the shortcuts community cooks actually recommend.</p><span
-                  class="arrow">↘</span>
+                <p>Fast mains, simple sides and the shortcuts community cooks actually recommend.</p>
               </div>
               <div class="mini">
-                <div class="mini-top"><span class="tag">COMMUNITY PICK</span><span>↗</span></div>
+                <div class="mini-top"><span class="tag">COMMUNITY PICK</span></div>
                 <h3>The recipes people remake.</h3>
-                <p>See what gets cooked again — not just what gets a five-star photo.</p><span class="arrow">↘</span>
+                <p>See what gets cooked again — not just what gets a five-star photo.</p>
               </div>
             </div>
           </div>
@@ -4388,10 +4757,10 @@
         <div class="shell">
           <div class="head center">
             <div class="num"
-              style="color:var(--lime);display:inline-flex;align-items:center;gap:6px;background:rgba(215,231,94,.1);padding:5px 14px;border-radius:99px;border:1px solid rgba(215,231,94,.2);margin-bottom:12px;font-size:10px;letter-spacing:.14em">
+              style="color:var(--lime);display:inline-flex;align-items:center;gap:6px;background:rgba(215,231,94,.12);padding:7px 16px;border-radius:99px;border:1px solid rgba(215,231,94,.28);margin-bottom:14px;font-size:12px;font-weight:700;letter-spacing:.14em">
               LIVE TELEMETRY · KITCHEN FLOW</div>
             <h2>From idea to plate, live.</h2>
-            <p>A moving kitchen-flow tracker turns the cooking journey into a visual system.</p>
+            <p style="font-size:17px;color:#d8e7de;max-width:640px;margin:0 auto">A moving kitchen-flow tracker turns the cooking journey into a visual system.</p>
           </div>
           <div class="kitchen-flow reveal">
             <div class="flow-head">
@@ -4469,7 +4838,7 @@
                   <span class="flow-card-icon">⭐</span>
                 </div>
                 <strong>860</strong>
-                <p>Notes and taste feedback moving through network</p>
+                <p>Notes and taste feedback across the network</p>
                 <div class="flow-card-foot">
                   <span class="flow-card-pill">4.9 Avg signal</span>
                   <small>100% verified</small>
@@ -4583,7 +4952,7 @@
             <div class="num">THE INVITATION</div>
             <h2>Your kitchen has a seat here.</h2>
             <p>Save a dish. Cook it. Tell us what happened. Help someone else decide what to make tonight.</p><a
-              class="btn accent" href="#login" data-page="login">Create your profile →</a>
+              class="btn accent" href="#login" data-page="login">Create your profile</a>
           </div>
         </div>
       </section>
@@ -4615,11 +4984,11 @@
             <div class="side-stack">
               <div class="mini"><span class="tag">SAVEABLE</span>
                 <h3>Weeknight wins</h3>
-                <p>Short ingredient lists, realistic prep times and high repeat rates.</p><span class="arrow">↗</span>
+                <p>Short ingredient lists, realistic prep times and high repeat rates.</p>
               </div>
               <div class="mini"><span class="tag">WEEKEND</span>
                 <h3>Bring something to the table.</h3>
-                <p>Recipes designed to be passed around, not plated alone.</p><span class="arrow">↗</span>
+                <p>Recipes designed to be passed around, not plated alone.</p>
               </div>
             </div>
           </div>
@@ -4765,29 +5134,49 @@
       <section class="section">
         <div class="shell">
           <div class="service-grid reveal">
-            <article class="service-tile"><span class="number">DISCOVER</span>
-              <div>
-                <h3>Find the dish.</h3>
-                <p>Search by mood, time, ingredient and community response instead of scrolling a generic feed.</p>
-              </div><span class="service-arrow">↘</span>
+            <article class="service-tile">
+              <div class="service-card-img">
+                <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fresh dish discovery" loading="lazy">
+              </div>
+              <span class="service-eyebrow">DISCOVER</span>
+              <h3>Find the dish.</h3>
+              <p class="service-subtext">Search by mood, time, ingredient and community response instead of scrolling a generic feed.</p>
+              <div class="service-action">
+                <a href="#recipes" data-page="recipes" class="btn light service-btn">Explore recipes</a>
+              </div>
             </article>
-            <article class="service-tile"><span class="number">REVIEW</span>
-              <div>
-                <h3>Know before you cook.</h3>
-                <p>See what people actually changed, loved, disliked and would do differently.</p>
-              </div><span class="service-arrow">↘</span>
+            <article class="service-tile">
+              <div class="service-card-img">
+                <img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Community food review" loading="lazy">
+              </div>
+              <span class="service-eyebrow">REVIEW</span>
+              <h3>Know before you cook.</h3>
+              <p class="service-subtext">See what people actually changed, loved, disliked and would do differently.</p>
+              <div class="service-action">
+                <a href="#recipes" data-page="recipes" class="btn light service-btn">See community reviews</a>
+              </div>
             </article>
-            <article class="service-tile"><span class="number">PLAN</span>
-              <div>
-                <h3>Turn saves into dinner.</h3>
-                <p>Group recipes into a practical week plan and keep the next action visible.</p>
-              </div><span class="service-arrow">↘</span>
+            <article class="service-tile">
+              <div class="service-card-img">
+                <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Weekly meal plan pasta" loading="lazy">
+              </div>
+              <span class="service-eyebrow">PLAN</span>
+              <h3>Turn saves into dinner.</h3>
+              <p class="service-subtext">Group recipes into a practical week plan and keep the next action visible.</p>
+              <div class="service-action">
+                <a href="#dashboard" data-page="dashboard" class="btn light service-btn">Open meal planner</a>
+              </div>
             </article>
-            <article class="service-tile"><span class="number">CONNECT</span>
-              <div>
-                <h3>Cook with people.</h3>
-                <p>Join community rooms for hosting, home cooking, technique and ingredient ideas.</p>
-              </div><span class="service-arrow">↘</span>
+            <article class="service-tile">
+              <div class="service-card-img">
+                <img src="https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Cooking and dining community" loading="lazy">
+              </div>
+              <span class="service-eyebrow">CONNECT</span>
+              <h3>Cook with people.</h3>
+              <p class="service-subtext">Join community rooms for hosting, home cooking, technique and ingredient ideas.</p>
+              <div class="service-action">
+                <a href="#contact" data-page="contact" class="btn light service-btn">Join community rooms</a>
+              </div>
             </article>
           </div>
         </div>
@@ -4873,7 +5262,7 @@
     <section id="dashboard" class="page">
       <div class="dashboard-page">
         <div class="dashboard-top">
-          <div class="dashboard-brand"><span class="brand-mark"><svg class="logo-3d" viewBox="0 0 48 48"
+          <div class="dashboard-brand" onclick="showPage('home')" style="cursor:pointer" title="Return to Home"><span class="brand-mark"><svg class="logo-3d" viewBox="0 0 48 48"
                 aria-hidden="true">
                 <defs>
                   <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
@@ -4893,8 +5282,7 @@
                   stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round" />
               </svg></span><b>Table & Tale</b></div>
-          <div class="dashboard-actions"><span class="dashboard-user">Aria · Member</span><button class="btn light"
-              onclick="showPage('home')">← Website</button><button class="btn accent"
+          <div class="dashboard-actions"><button class="btn accent"
               onclick="logoutDemo()">Logout</button></div>
         </div>
         <div class="dashboard-content">
@@ -4923,7 +5311,7 @@
                 <div><span class="kicker">DINNER / 30 MIN</span>
                   <h3>Herb pasta with roasted greens</h3>
                   <p>Saved from Weeknight Wins · 4.9 community signal</p><button class="btn dark"
-                    onclick="alert('Demo recipe opened')">Open recipe →</button>
+                    onclick="alert('Demo recipe opened')">Open recipe</button>
                 </div>
               </div>
             </section>
@@ -4943,10 +5331,10 @@
             <div class="panel-title">
               <h2>Quick actions</h2><span>YOUR SHORTCUTS</span>
             </div>
-            <div class="quick-actions"><button onclick="alert('Demo: open saved recipes')">Saved recipes
-                <b>→</b></button><button onclick="alert('Demo: open meal plans')">Meal plans <b>→</b></button><button
-                onclick="alert('Demo: open reviews')">My reviews <b>→</b></button><button
-                onclick="alert('Demo: account settings')">Account settings <b>→</b></button></div>
+            <div class="quick-actions"><button onclick="alert('Demo: open saved recipes')">Saved recipes</button><button
+                onclick="alert('Demo: open meal plans')">Meal plans</button><button
+                onclick="alert('Demo: open reviews')">My reviews</button><button
+                onclick="alert('Demo: account settings')">Account settings</button></div>
           </section>
         </div>
       </div>
@@ -4956,26 +5344,26 @@
     <section id="login" class="page auth-page">
       <div class="auth-screen">
         <div class="auth-box auth-premium">
-          <a class="auth-logo" href="#home" data-page="home"><span class="brand-mark"><svg class="logo-3d"
+          <a class="brand auth-logo" href="#home" data-page="home"><span class="brand-mark"><svg class="logo-3d"
                 viewBox="0 0 48 48" aria-hidden="true">
                 <defs>
-                  <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+                  <linearGradient id="plateGLogin" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0" stop-color="#fff7e9" />
                     <stop offset=".55" stop-color="#f3c768" />
                     <stop offset="1" stop-color="#c66a42" />
                   </linearGradient>
-                  <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+                  <linearGradient id="metalGLogin" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0" stop-color="#ffffff" />
                     <stop offset=".5" stop-color="#cbd4cc" />
                     <stop offset="1" stop-color="#7e8b83" />
                   </linearGradient>
                 </defs>
-                <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateG)" opacity=".96" />
+                <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateGLogin)" opacity=".96" />
                 <ellipse cx="24" cy="24" rx="11.5" ry="7.5" fill="#fffaf0" opacity=".92" />
-                <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12" fill="none" stroke="url(#metalG)"
+                <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12" fill="none" stroke="url(#metalGLogin)"
                   stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round" />
-              </svg></span><strong>Table & Tale</strong></a>
+              </svg></span><span>Table & Tale</span></a>
           <div class="auth-visual-strip">
             <img
               src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=900"
@@ -4990,13 +5378,43 @@
           <div class="kicker">MEMBER ACCESS</div>
           <h1>Welcome back.</h1>
           <p>Save recipes, build meal plans and keep your kitchen notes together.</p>
-          <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
-          <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
-          <button class="btn dark" style="width:100%" onclick="alert('Demo sign-in successful')">Sign in →</button>
-          <div class="auth-or">or</div>
-          <button class="btn light" style="width:100%" onclick="alert('Demo Google sign-in')">Continue with
-            Google</button>
-          <div class="auth-switch">New here? <a href="#signup" data-page="signup">Create an account →</a></div>
+          <form onsubmit="event.preventDefault(); handleLoginSubmit();">
+            <div class="field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" placeholder="you@example.com" required autocomplete="email"></div>
+            <div class="field">
+              <label for="loginPassword">Password</label>
+              <div class="pw-wrap">
+                <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
+                <button type="button" class="pw-toggle" aria-label="Show password" onclick="togglePassword('loginPassword', this)">
+                  <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="auth-row-options">
+              <label class="check-label" for="loginRemember">
+                <input type="checkbox" id="loginRemember" name="remember" checked>
+                <span>Remember me</span>
+              </label>
+              <a href="#forgot" class="forgot-link" onclick="event.preventDefault(); alert('Demo: Password reset instructions sent to your email.');">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn dark" style="width:100%">Sign in</button>
+          </form>
+          <div class="auth-divider"><span>or continue with</span></div>
+          <div class="auth-social-row">
+            <button type="button" class="btn-social" aria-label="Sign in with Google" onclick="alert('Demo Google sign-in')">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              <span>Google</span>
+            </button>
+            <button type="button" class="btn-social" aria-label="Sign in with Apple" onclick="alert('Demo Apple sign-in')">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8 1.01-2.85-.9.04-2 .6-2.65 1.35-.58.65-1.08 1.71-1.02 2.74 1.01.08 2.04-.49 2.66-1.24z"/></svg>
+              <span>Apple</span>
+            </button>
+            <button type="button" class="btn-social" aria-label="Sign in with Facebook" onclick="alert('Demo Facebook sign-in')">
+              <svg viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span>Facebook</span>
+            </button>
+          </div>
+          <div class="auth-switch">New here? <a href="#signup" data-page="signup">Create an account</a></div>
         </div>
       </div>
     </section>
@@ -5004,26 +5422,26 @@
     <section id="signup" class="page auth-page">
       <div class="auth-screen">
         <div class="auth-box auth-premium">
-          <a class="auth-logo" href="#home" data-page="home"><span class="brand-mark"><svg class="logo-3d"
+          <a class="brand auth-logo" href="#home" data-page="home"><span class="brand-mark"><svg class="logo-3d"
                 viewBox="0 0 48 48" aria-hidden="true">
                 <defs>
-                  <linearGradient id="plateG" x1="0" y1="0" x2="1" y2="1">
+                  <linearGradient id="plateGSignup" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0" stop-color="#fff7e9" />
                     <stop offset=".55" stop-color="#f3c768" />
                     <stop offset="1" stop-color="#c66a42" />
                   </linearGradient>
-                  <linearGradient id="metalG" x1="0" y1="0" x2="1" y2="1">
+                  <linearGradient id="metalGSignup" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0" stop-color="#ffffff" />
                     <stop offset=".5" stop-color="#cbd4cc" />
                     <stop offset="1" stop-color="#7e8b83" />
                   </linearGradient>
                 </defs>
-                <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateG)" opacity=".96" />
+                <ellipse cx="24" cy="26" rx="16.5" ry="12.5" fill="url(#plateGSignup)" opacity=".96" />
                 <ellipse cx="24" cy="24" rx="11.5" ry="7.5" fill="#fffaf0" opacity=".92" />
-                <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12" fill="none" stroke="url(#metalG)"
+                <path d="M12 9v10M16 9v10M14 9v25M35 9c-4 4-6 8-6 13v3h6v12" fill="none" stroke="url(#metalGSignup)"
                   stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M17 19c3-3 8-4 13-1" fill="none" stroke="#d85f42" stroke-width="2" stroke-linecap="round" />
-              </svg></span><strong>Table & Tale</strong></a>
+              </svg></span><span>Table & Tale</span></a>
           <div class="auth-visual-strip">
             <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=900"
               alt="Breakfast">
@@ -5037,12 +5455,59 @@
           <div class="kicker">CREATE ACCOUNT</div>
           <h1>Join the table.</h1>
           <p>Build your profile and start saving, cooking and sharing.</p>
-          <div class="field"><label>Name</label><input placeholder="Your name"></div>
-          <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
-          <div class="field"><label>Password</label><input type="password" placeholder="Create a password"></div>
-          <button class="btn accent" style="width:100%" onclick="alert('Demo account created')">Create account
-            →</button>
-          <div class="auth-switch">Already a member? <a href="#login" data-page="login">Sign in →</a></div>
+          <form onsubmit="event.preventDefault(); handleSignupSubmit();">
+            <div class="field"><label for="signupName">Full Name</label><input type="text" id="signupName" placeholder="Your name" required autocomplete="name"></div>
+            <div class="field"><label for="signupEmail">Email</label><input type="email" id="signupEmail" placeholder="you@example.com" required autocomplete="email"></div>
+            <div class="field">
+              <label for="signupPassword">Password</label>
+              <div class="pw-wrap">
+                <input type="password" id="signupPassword" placeholder="Create a password (min. 8 characters)" required autocomplete="new-password">
+                <button type="button" class="pw-toggle" aria-label="Show password" onclick="togglePassword('signupPassword', this)">
+                  <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="signupConfirmPassword">Confirm Password</label>
+              <div class="pw-wrap">
+                <input type="password" id="signupConfirmPassword" placeholder="Re-enter your password" required autocomplete="new-password">
+                <button type="button" class="pw-toggle" aria-label="Show password" onclick="togglePassword('signupConfirmPassword', this)">
+                  <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="auth-terms">
+              <label class="check-label" for="signupTerms">
+                <input type="checkbox" id="signupTerms" name="terms" required checked>
+                <span>I agree to the <a href="#terms" class="terms-link" onclick="event.preventDefault(); alert('Demo: Terms of Service agreement.');">Terms of Service</a> &amp; <a href="#privacy" class="terms-link" onclick="event.preventDefault(); alert('Demo: Privacy Policy notice.');">Privacy Policy</a></span>
+              </label>
+            </div>
+            <div class="auth-row-options auth-remember-row">
+              <label class="check-label" for="signupRemember">
+                <input type="checkbox" id="signupRemember" name="remember" checked>
+                <span>Remember me on this device</span>
+              </label>
+            </div>
+            <button type="submit" class="btn accent" style="width:100%">Create account</button>
+          </form>
+          <div class="auth-divider"><span>or sign up with</span></div>
+          <div class="auth-social-row">
+            <button type="button" class="btn-social" aria-label="Sign up with Google" onclick="alert('Demo Google sign-up')">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.27 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              <span>Google</span>
+            </button>
+            <button type="button" class="btn-social" aria-label="Sign up with Apple" onclick="alert('Demo Apple sign-up')">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8 1.01-2.85-.9.04-2 .6-2.65 1.35-.58.65-1.08 1.71-1.02 2.74 1.01.08 2.04-.49 2.66-1.24z"/></svg>
+              <span>Apple</span>
+            </button>
+            <button type="button" class="btn-social" aria-label="Sign up with Facebook" onclick="alert('Demo Facebook sign-up')">
+              <svg viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span>Facebook</span>
+            </button>
+          </div>
+          <div class="auth-switch">Already a member? <a href="#login" data-page="login">Sign in</a></div>
         </div>
       </div>
     </section>
@@ -5077,7 +5542,7 @@
             <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
             <div class="field"><label>Message</label><textarea rows="8"
                 placeholder="Tell us what you are cooking..."></textarea></div><button class="btn accent"
-              style="width:100%" onclick="alert('Demo message submitted')">Send message →</button>
+              style="width:100%" onclick="alert('Demo message submitted')">Send message</button>
           </div>
         </div>
       </section>
@@ -5199,7 +5664,44 @@
     window.addEventListener('popstate', () => showPage(location.hash.slice(1) || 'home', false));
     showPage(location.hash.slice(1) || 'home', false);
 
-    function logoutDemo() { showPage('login'); alert('Demo logout complete.'); }
+    function logoutDemo() { showPage('home'); alert('Demo logout complete.'); }
+
+    function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const isPw = input.type === 'password';
+      input.type = isPw ? 'text' : 'password';
+      btn.setAttribute('aria-label', isPw ? 'Hide password' : 'Show password');
+      const open = btn.querySelector('.eye-open');
+      const closed = btn.querySelector('.eye-closed');
+      if (open && closed) {
+        open.style.display = isPw ? 'none' : 'block';
+        closed.style.display = isPw ? 'block' : 'none';
+      }
+    }
+
+    function handleLoginSubmit() {
+      alert('Demo sign-in successful! Welcome back to Table & Tale.');
+      showPage('dashboard');
+    }
+
+    function handleSignupSubmit() {
+      const p1 = document.getElementById('signupPassword');
+      const p2 = document.getElementById('signupConfirmPassword');
+      const terms = document.getElementById('signupTerms');
+      if (terms && !terms.checked) {
+        alert('Please agree to the Terms of Service & Privacy Policy to continue.');
+        terms.focus();
+        return;
+      }
+      if (p1 && p2 && p1.value && p2.value && p1.value !== p2.value) {
+        alert('Passwords do not match. Please ensure both password fields match.');
+        p2.focus();
+        return;
+      }
+      alert('Demo account created successfully! Welcome to Table & Tale.');
+      showPage('dashboard');
+    }
 
     function initReveal() {
       const els = document.querySelectorAll('.page.active .reveal');
